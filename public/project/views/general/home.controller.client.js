@@ -6,7 +6,7 @@
     function HomeController($location, UserService) {
         var vm = this;
         vm.getBackdropUrl = getBackdropUrl;
-        vm.getFirstShow = getFirstShow;
+        vm.getFirstUrl = getFirstUrl;
 
         var apiKey = "77c6e46c7c8297c719b1cd52b441fcb8";
         
@@ -20,16 +20,14 @@
         }
         init();
 
-        function getFirstShow() {
+        function getFirstUrl() {
             var show = vm.popShows[0];
-            vm.popShows.splice(0,1);
-            var baseUrl = "http://image.tmdb.org/t/p/";
-            return baseUrl + show.backdrop_path + "?api_key=" + apiKey;
+            return getBackdropUrl(show);
         }
 
         function getBackdropUrl(show) {
             var baseUrl = "http://image.tmdb.org/t/p/w500";
-            return baseUrl + show.backdrop_path;//+ "?api_key=" + apiKey;
+            return baseUrl + show.backdrop_path;
         }
 
         $('.multi-item-carousel').carousel({

@@ -5,6 +5,32 @@
 
     function HomeController($location, UserService) {
         var vm = this;
+        vm.getBackdropUrl = getBackdropUrl;
+        vm.getFirstShow = getFirstShow;
+
+        var apiKey = "77c6e46c7c8297c719b1cd52b441fcb8";
+        
+        function init() {
+            UserService
+                .getPopShows()
+                .then(function(res) {
+                    vm.popShows = res.data.results;
+                    vm.popShows.splice(0,5);
+                });
+        }
+        init();
+
+        function getFirstShow() {
+            var show = vm.popShows[0];
+            vm.popShows.splice(0,1);
+            var baseUrl = "http://image.tmdb.org/t/p/";
+            return baseUrl + show.backdrop_path + "?api_key=" + apiKey;
+        }
+
+        function getBackdropUrl(show) {
+            var baseUrl = "http://image.tmdb.org/t/p/w500";
+            return baseUrl + show.backdrop_path;//+ "?api_key=" + apiKey;
+        }
 
         $('.multi-item-carousel').carousel({
             interval: false

@@ -2,6 +2,10 @@
     padding-left: 5px;
 }
 
+.btn-primary {
+    overflow-wrap: normal;
+}
+
 body {
     padding-top: 60px;
     padding-bottom: 60px;

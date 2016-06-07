@@ -3,7 +3,7 @@
         .module("TVTracker")
         .controller("HomeController", HomeController);
 
-    function HomeController($location, UserService) {
+    function HomeController($location, $sce, UserService) {
         var vm = this;
         vm.getBackdropUrl = getBackdropUrl;
         vm.getFirstUrl = getFirstUrl;
@@ -27,10 +27,10 @@
 
         function getBackdropUrl(show) {
             var baseUrl = "http://image.tmdb.org/t/p/w500";
-            return baseUrl + show.backdrop_path;
+            return $sce.trustAsResourceUrl(baseUrl + show.backdrop_path);
         }
 
-        $('.multi-item-carousel').carousel({
+        $('.multi-item-carousel').carousel({    
             interval: false
         });
 

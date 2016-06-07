@@ -21,8 +21,10 @@
                 <div class="col-md-12">
                     <div class="carousel slide multi-item-carousel" id="theCarousel">
                         <div class="carousel-inner">
-                            <div class="item" ng-class="{active:!$index}" ng-repeat="show in model.popShows">
-                                <div class="col-xs-4"><a href="#1"><img ng-src={{model.getBackdropUrl(show)}} class="img-responsive"></a></div>
+                            <div ng-repeat="show in model.popShows">
+                                <div class="item" ng-class="{active:$first}">
+                                    <div class="col-xs-4"><a href="#1"><img ng-src={{model.getBackdropUrl(show)}} class="img-responsive"></a></div>
+                                </div>
                             </div>
                         </div>
                         <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>

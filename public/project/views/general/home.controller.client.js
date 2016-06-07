@@ -30,7 +30,7 @@
             return $sce.trustAsResourceUrl(baseUrl + show.backdrop_path);
         }
 
-        $('.multi-item-carousel').carousel({    
+        $('.multi-item-carousel').carousel({
             interval: false
         });
 

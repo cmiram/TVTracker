@@ -17,21 +17,21 @@
 <div class="container">
     <div class="shows">
         <div class="trending-shows">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="carousel slide multi-item-carousel" id="theCarousel">
-                        <div class="carousel-inner">
-                            <div ng-repeat="show in model.popShows">
-                                <div class="item" ng-class="{active:$first}">
-                                    <div class="col-xs-4"><a href="#1"><img ng-src={{model.getBackdropUrl(show)}} class="img-responsive"></a></div>
-                                </div>
-                            </div>
+            <carousel>
+                <slide ng-repeat="show in model.popShows" active="slide.active">
+                    <div class="" style="width:600px;margin:auto;">
+                        <div >
+                            <img ng-src="{{slide.image}}" width="200px" style="float:left;">
                         </div>
-                        <a class="left carousel-control" href="#theCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-                        <a class="right carousel-control" href="#theCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                        <div >
+                            <img ng-src="{{slides[getSecondIndex($index+1)].image}}" width="200px" style="float:left;" >
+                        </div>
+                        <div >
+                            <img ng-src="{{slides[getSecondIndex($index+2)].image}}" width="200px" style="float:left;" >
+                        </div>
                     </div>
-                </div>
-            </div>
+                </slide>
+            </carousel>
         </div>
         <div class="currentShows">
 

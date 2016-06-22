@@ -38,7 +38,7 @@ module.exports = function() {
     function updateUser(userId, newUser) {
         return User.update(
             {_id: userId},
-            { $set: newUser}
+            {$set: newUser}
         );
     }
 
@@ -49,7 +49,7 @@ module.exports = function() {
     function pushShow(userId, showId) {
         return User.update(
             {_id: userId},
-            { $pushAll: {shows: [showId]}}
+            {$pushAll: {shows: [showId]}}
         );
     }
 

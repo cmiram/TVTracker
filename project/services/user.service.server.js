@@ -4,7 +4,7 @@ module.exports = function(app,models) {
     var LocalStrategy = require('passport-local').Strategy;
     var auth = authorized;
     //var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-    //var FacebookStrategy = require('passport-facebook').Strategy;
+    var FacebookStrategy = require('passport-facebook').Strategy;
     var bcrypt = require("bcrypt-nodejs");
 
     //app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
@@ -20,6 +20,10 @@ module.exports = function(app,models) {
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
+    app.put('/api/:userId/followShow/:showId/', pushShow);
+    app.delete('/api/:userId/unfollowShow/:showId', pullShow);
+    app.put('/api/:userId/follow/:followId', pushFollow);
+    app.delete('/api/:userId/unfollow/:followId', pullFollow);
 
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
@@ -47,6 +51,7 @@ module.exports = function(app,models) {
     passport.use('tvt', new LocalStrategy(localStrategy));
 //    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
  //   passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
@@ -272,5 +277,61 @@ module.exports = function(app,models) {
             }
         }
         res.send({});
+    }
+
+    function pushShow(req, res) {
+        var showId = req.params.showId;
+        var userId = req.params.userId;
+
+        userModel
+            .pushShow(userId, showId)
+            .then(function() {
+                res.send(200);
+            },
+            function(error) {
+                res.status(400).send("Unable to add show");
+            });
+    }
+
+    function pullShow(req, res) {
+        var showId = req.params.showId;
+        var userId = req.params.userId;
+
+        userModel
+            .pullShow(userId, showId)
+            .then(function() {
+                res.send(200);
+            },
+            function(error) {
+                res.status(400).send("Unable to remove show");
+            });
+    }
+
+    function pushFollow(req, res) {
+        var userId = req.params.userId;
+        var followId = req.params.followId;
+
+        userModel
+            .pushFollow(userId, followId)
+            .then(function() {
+                res.send(200);
+            },
+            function(error) {
+                res.status(400).send("Unable to follow user");
+            });
+    }
+
+    function pullFollow(req, res) {
+        var userId = req.params.userId;
+        var followId = req.params.unfollowId;
+
+        userModel
+            .pullFollow(userId, followId)
+            .then(function() {
+                res.send(200);
+            },
+            function(error) {
+                res.status(400).send("Unable to unfollow user");
+            });
     }
 };

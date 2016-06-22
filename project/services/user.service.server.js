@@ -3,7 +3,7 @@ module.exports = function(app,models) {
     var passport      = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
     var auth = authorized;
-    var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+    //var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
     var bcrypt = require("bcrypt-nodejs");
 
@@ -45,8 +45,8 @@ module.exports = function(app,models) {
     };
 
     passport.use('wam', new LocalStrategy(localStrategy));
-    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-    passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+    //passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+    //passport.use(new GoogleStrategy(googleConfig, googleStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 

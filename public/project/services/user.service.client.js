@@ -8,7 +8,6 @@
 
         var api = {
             getPopShows: getPopShows,
-            createUser: createUser,
             checkLoggedin: checkLoggedin,
             register: register,
             login: login,
@@ -57,14 +56,6 @@
             return $http.post(url, user);
         }
 
-        function createUser(username, password) {
-            var url = "/api/user";
-            var user = {
-                username: username,
-                password: password
-            };
-            return $http.post(url, user);
-        }
 
         function deleteUser(id) {
             var url = "/api/user/" + id;

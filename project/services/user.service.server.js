@@ -12,10 +12,7 @@ module.exports = function(app,models) {
     app.post  ('/api/login', passport.authenticate('tvt'), login);
     app.post  ('/api/logout',         logout);
     app.post  ('/api/register',       register);
-    app.post  ('/api/user',     auth, createUser);
     app.get   ('/api/loggedin',       loggedin);
-
-    app.post("/api/user", createUser);
     app.get("/api/user", getUsers);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);

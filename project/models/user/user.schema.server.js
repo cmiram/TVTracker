@@ -5,11 +5,7 @@ module.exports = function () {
         username: String,
         password: String,
         firstName: String,
-<<<<<<< HEAD
         lastName: String,
-=======
-        lastName: lastName,
->>>>>>> added directory structure for serverside files
         email: String,
         shows: [Number],
         follows: [{

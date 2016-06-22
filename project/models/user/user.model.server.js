@@ -1,10 +1,6 @@
 module.exports = function() {
     var mongoose = require('mongoose');
-<<<<<<< HEAD
     var UserSchema = require('./user.schema.server.js')();
-=======
-    var UserSchema = require('./user.schema.server.js');
->>>>>>> added directory structure for serverside files
     var User = mongoose.model('User', UserSchema);
 
     var api = {
@@ -26,8 +22,6 @@ module.exports = function() {
     function createUser(user) {
         return User.create(user);
     }
-
-<<<<<<< HEAD
     function findUserById(userId) {
         return User.findOne({_id: userId});
     }
@@ -87,7 +81,4 @@ module.exports = function() {
         return User.findOne({'google.id': googleId});
     }
 };
-=======
-    
-}
->>>>>>> added directory structure for serverside files
+

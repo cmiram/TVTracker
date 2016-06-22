@@ -23,7 +23,6 @@ module.exports = function() {
         return User.create(user);
     }
 
-<<<<<<< HEAD
     function findUserById(userId) {
         return User.findOne({_id: userId});
     }
@@ -39,7 +38,7 @@ module.exports = function() {
     function updateUser(userId, newUser) {
         return User.update(
             {_id: userId},
-            { $set: newUser}
+            {$set: newUser}
         );
     }
 
@@ -50,7 +49,7 @@ module.exports = function() {
     function pushShow(userId, showId) {
         return User.update(
             {_id: userId},
-            { $pushAll: {shows: [showId]}}
+            {$pushAll: {shows: [showId]}}
         );
     }
 
@@ -83,7 +82,3 @@ module.exports = function() {
         return User.findOne({'google.id': googleId});
     }
 };
-=======
-    
-}
->>>>>>> origin/Grantspull

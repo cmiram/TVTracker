@@ -46,12 +46,10 @@ module.exports = function(app,models) {
         clientSecret : process.env.GOOGLE_CLIENT_SECRET,
         callbackURL  : process.env.GOOGLE_CALLBACK_URL
     };
-
+    
     passport.use('tvt', new LocalStrategy(localStrategy));
-
     //passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
     //passport.use(new GoogleStrategy(googleConfig, googleStrategy));
-
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 

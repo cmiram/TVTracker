@@ -23,6 +23,7 @@ module.exports = function() {
         return User.create(user);
     }
 
+<<<<<<< HEAD
     function findUserById(userId) {
         return User.findOne({_id: userId});
     }
@@ -82,3 +83,7 @@ module.exports = function() {
         return User.findOne({'google.id': googleId});
     }
 };
+=======
+    
+}
+>>>>>>> origin/Grantspull

@@ -5,7 +5,7 @@ module.exports = function () {
         username: String,
         password: String,
         firstName: String,
-        lastName: lastName,
+        lastName: String,
         email: String,
         shows: [Number],
         follows: [{

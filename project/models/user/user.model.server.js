@@ -83,7 +83,4 @@ module.exports = function() {
         return User.findOne({'google.id': googleId});
     }
 };
-<<<<<<< HEAD
 
-=======
->>>>>>> added directory structure for serverside files

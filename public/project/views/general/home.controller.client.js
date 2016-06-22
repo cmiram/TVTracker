@@ -16,6 +16,9 @@
                 .then(function(res) {
                     vm.popShows = res.data.results;
                     vm.popShows.splice(0,5);
+                })
+                .then(function() {
+                    CarouselInit();
                 });
         }
         init();
@@ -50,6 +53,29 @@
             }
         });
 
+        function CarouselInit() {
+            vm.carouselInterval = 7000;
+
+            var i, first = [],
+                second, third;
+            var many = 3;
+
+            for (i = 0; i < vm.popShows.length; i += many) {
+                second = {
+                    show1: vm.popShows[i]
+                };
+                if (many == 1) {}
+                if (vm.popShows[i + 1] && (many == 2 || many == 3)) {
+                    second.show2 = vm.popShows[i + 1];
+
+                }
+                if (vm.popShows[i + (many - 1)] && many == 3) {
+                    second.show3 = vm.popShows[i + 2];
+                }
+                first.push(second);
+            }
+            vm.groupedSlides = first;
+        }
     }
 })();
 

@@ -1,6 +1,4 @@
 module.exports = function(app) {
-    var http = require('http');
-    var https = require('https');
     var request = require('request');
     
     var baseUrl = 'https://epguides.frecar.no';

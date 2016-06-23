@@ -80,9 +80,5 @@ module.exports = function() {
     function findUserByGoogleId(googleId) {
         return User.findOne({'google.id': googleId});
     }
-<<<<<<< HEAD
 };
 
-=======
-};
->>>>>>> updated user api to match new user model

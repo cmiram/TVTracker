@@ -7,6 +7,9 @@
         var vm = this;
         vm.getBackdropUrl = getBackdropUrl;
         vm.getFirstUrl = getFirstUrl;
+        vm.login = login;
+
+
 
         var apiKey = "77c6e46c7c8297c719b1cd52b441fcb8"; //process.env.API_KEY;
         
@@ -22,6 +25,17 @@
                 });
         }
         init();
+
+        function login(username, password) {
+            var user = UserService.findUserByUsernameAndPassword(username, password);
+            if (user) {
+                var id = user._id;
+                $location.url("/user/home/" + id);
+            }
+            else {
+                vm.error = "User not found";
+            }
+        }
 
         function getFirstUrl() {
             var show = vm.popShows[0];

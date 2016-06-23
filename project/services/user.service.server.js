@@ -2,7 +2,8 @@ module.exports = function(app,models) {
     var userModel = models.userModel;
     var passport      = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
-    var auth = authorized;
+
+    var auth = authorized; //need to get rid of this
     //var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
     //var FacebookStrategy = require('passport-facebook').Strategy;
     var bcrypt = require("bcrypt-nodejs");

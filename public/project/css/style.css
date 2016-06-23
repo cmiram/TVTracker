@@ -41,3 +41,6 @@ body {
 .multi-item-carousel .carouse-control.right {
     background-image: none;
 }
+.col-lg-6 {
+    width: 50%;
+}

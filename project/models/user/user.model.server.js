@@ -1,6 +1,6 @@
 module.exports = function() {
     var mongoose = require('mongoose');
-    var UserSchema = require('./user.schema.server.js');
+    var UserSchema = require('./user.schema.server.js')();
     var User = mongoose.model('User', UserSchema);
 
     var api = {
@@ -22,7 +22,6 @@ module.exports = function() {
     function createUser(user) {
         return User.create(user);
     }
-
     function findUserById(userId) {
         return User.findOne({_id: userId});
     }
@@ -82,3 +81,4 @@ module.exports = function() {
         return User.findOne({'google.id': googleId});
     }
 };
+

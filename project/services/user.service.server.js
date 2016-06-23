@@ -8,15 +8,13 @@ module.exports = function(app,models) {
     //var FacebookStrategy = require('passport-facebook').Strategy;
     var bcrypt = require("bcrypt-nodejs");
 
-    app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    //app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+    //app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
     app.post  ('/api/login', passport.authenticate('tvt'), login);
     app.post  ('/api/logout',         logout);
     app.post  ('/api/register',       register);
-    app.post  ('/api/user',     auth, createUser);
     app.get   ('/api/loggedin',       loggedin);
-
-    app.post("/api/user", createUser);
     app.get("/api/user", getUsers);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
@@ -50,8 +48,10 @@ module.exports = function(app,models) {
     };
 
     passport.use('tvt', new LocalStrategy(localStrategy));
+
     //passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
     //passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 

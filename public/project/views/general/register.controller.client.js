@@ -3,28 +3,28 @@
         .module("TVTracker")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController($location, UserService) {
-        var vm = this;
+        function RegisterController($location, $rootScope, UserService) {
+            var vm = this;
 
-        vm.register = register;
-
-        function register(username, password, passwordVerify) {
-            if (password === passwordVerify) {
-                var newUser = {
-                    username: username,
-                    password: password
+            vm.register = function(username, password, passconfirm){
+                if(password === passconfirm) {
+                    UserService
+                        .register(username, password)
+                        .then(
+                            function(response){
+                                var user = response.data;
+                                $rootScope.currentUser = user;
+                                $location.url("/profile/"+user._id);
+                            },
+                            function(error){
+                                vm.error = error.data;
+                            }
+                        );
                 }
-                if (UserService.createUser(newUser)) {
-                    $location.url("/user/" + UserService.findUserByUsernameAndPassword(username, password)._id);
-                }
-                else {
-                    vm.error = "Username already taken";
+                else{
+                    vm.error = "Password does not match confirmation";
                 }
             }
-            else {
-                vm.error = "Passwords do not match";
-            }
+
         }
-
-    }
-})();
+    })();

@@ -23,6 +23,14 @@
                     loggedin: checkLoggedin
                 }
             })
+            .when("/user/home/:uid/edit", {
+                templateUrl: "project/views/user/user-edit.view.client.html",
+                controller: "UserEdirController",
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
+            })
             .otherwise({
 
                 redirectTo: "/home"

@@ -8,10 +8,6 @@
         vm.getBackdropUrl = getBackdropUrl;
         vm.getFirstUrl = getFirstUrl;
         vm.login = login;
-
-
-
-        var apiKey = "77c6e46c7c8297c719b1cd52b441fcb8"; //process.env.API_KEY;
         
         function init() {
             UserService

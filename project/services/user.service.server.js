@@ -25,25 +25,27 @@ module.exports = function(app,models) {
 
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
-            successRedirect: '/#/profile',
-            failureRedirect: '/#/login'
+            successRedirect: '/#/user/home',
+            failureRedirect: '/#/home'
         }));
     app.get('/auth/google/callback',
         passport.authenticate('google', {
-            successRedirect: '/#/profile',
-            failureRedirect: '/#/login'
+            successRedirect: '/#/user/home',
+            failureRedirect: '/#/home'
         }));
 
     var facebookConfig = {
         clientID     : process.env.FACEBOOK_CLIENT_ID,
         clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL,
+        enableProof: true
     };
 
     var googleConfig = {
         clientID     : process.env.GOOGLE_CLIENT_ID,
         clientSecret : process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL  : process.env.GOOGLE_CALLBACK_URL
+        callbackURL  : process.env.GOOGLE_CALLBACK_URL,
+        enableProof: true
     };
     passport.use('tvt', new LocalStrategy(localStrategy));
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
@@ -108,7 +110,8 @@ module.exports = function(app,models) {
                             username: profile.displayName.replace(/ /g, ''),
                             facebook: {
                                 id: profile.id,
-                                displayName: profile.displayName
+                                displayName: profile.displayName,
+                                token: token
                             }
                         }
                         return userModel
@@ -124,7 +127,40 @@ module.exports = function(app,models) {
     }
 
     function googleStrategy(token, refreshToken, profile, done) {
-
+        userModel
+            .findUserByGoogleId(profile.id)
+            .then(
+                function(user) {
+                    if(user) {
+                        return done(null, user);
+                    } else {
+                        var email = profile.emails[0].value;
+                        var emailParts = email.split("@");
+                        var newGoogleUser = {
+                            username:  emailParts[0],
+                            firstName: profile.name.givenName,
+                            lastName:  profile.name.familyName,
+                            email:     email,
+                            google: {
+                                id:    profile.id,
+                                token: token
+                            }
+                        };
+                        return userModel.createUser(newGoogleUser);
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            )
+            .then(
+                function(user){
+                    return done(null, user);
+                },
+                function(err){
+                    if (err) { return done(err); }
+                }
+            );
     }
 
     function register(req, res) {

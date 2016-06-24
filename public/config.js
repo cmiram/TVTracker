@@ -1,4 +1,4 @@
-(function(){
+(function () {
     angular
         .module("TVTracker")
         .config(Config);
@@ -24,7 +24,9 @@
                 }
             })
             .otherwise({
+
                 redirectTo: "/home"
+        
             });
 
         function checkLoggedin(UserService, $q, $location, $rootScope) {
@@ -34,10 +36,10 @@
             UserService
                 .checkLoggedin()
                 .then(
-                    function(response) {
+                    function (response) {
                         var user = response.data;
                         console.log(user);
-                        if(user == '0') {
+                        if (user == '0') {
                             deferred.reject();
                             $rootScope.currentUser = null;
                             $location.url("/login")
@@ -46,7 +48,7 @@
                             deferred.resolve();
                         }
                     },
-                    function(err) {
+                    function (err) {
                         console.log(err);
                         $rootScope.currentUser = null;
                         deferred.reject();

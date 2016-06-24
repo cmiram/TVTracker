@@ -2,14 +2,13 @@ module.exports = function(app,models) {
     var userModel = models.userModel;
     var passport      = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
-
     var auth = authorized; //need to get rid of this
-    //var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-    //var FacebookStrategy = require('passport-facebook').Strategy;
+    var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+    var FacebookStrategy = require('passport-facebook').Strategy;
     var bcrypt = require("bcrypt-nodejs");
 
-    //app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-    //app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+    app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
 
     app.post  ('/api/login', passport.authenticate('tvt'), login);
     app.post  ('/api/logout',         logout);
@@ -47,8 +46,8 @@ module.exports = function(app,models) {
         callbackURL  : process.env.GOOGLE_CALLBACK_URL
     };
     passport.use('tvt', new LocalStrategy(localStrategy));
-    //passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-    //passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+    passport.use(new GoogleStrategy(googleConfig, googleStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 

@@ -10,11 +10,6 @@
                 controller: "HomeController",
                 controllerAs: "model"
             })
-            .when("/login", {
-                templateUrl: "project/views/general/login.view.client.html",
-                controller: "LoginController",
-                controllerAs: "model"
-            })
             .when("/register", {
                 templateUrl: "project/views/general/register.view.client.html",
                 controller: "RegisterController",

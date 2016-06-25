@@ -35,9 +35,11 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
 else {
     connectionString = 'mongodb://127.0.0.1:27017/webdev';
 }
-
 mongoose.connect(connectionString);
 
+app.set('view engine', 'ejs');
+
+require('./browseShows/app')(app);
 require('./project/app')(app);
 
 app.listen(port, ipaddress);

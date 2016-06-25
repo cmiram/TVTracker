@@ -1,5 +1,10 @@
 (function () {
     angular
-        .module("wamDirectives", [])
+        .module("tvtDirectives", [])
+        .directive("browseShows",browseShows)
+    
+    function browseShows(shows) {
+        
+    }
 
 })();

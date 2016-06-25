@@ -1,3 +1,3 @@
 (function () {
-    angular.module("TVTracker", ["ngRoute"]);
+    angular.module("TVTracker", ["ngRoute", "tvtDirectives"]);
 })();

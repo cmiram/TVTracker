@@ -25,7 +25,7 @@
             })
             .when("/user/home/:uid/edit", {
                 templateUrl: "project/views/user/user-edit.view.client.html",
-                controller: "UserEdirController",
+                controller: "UserEditController",
                 controllerAs: "model",
                 resolve: {
                     loggedin: checkLoggedin
@@ -33,7 +33,7 @@
             })
             .when("/shows/browse", {
                 templateUrl: "project/views/TVshows/browse-shows.view.client.html",
-                controller: "UserEdirController",
+                controller: "BrowseShowsController",
                 controllerAs: "model",
                 resolve: {
                     loggedin: checkLoggedin
@@ -54,7 +54,6 @@
                 .then(
                     function (response) {
                         var user = response.data;
-                        console.log(user);
                         if (user == '0') {
                             deferred.reject();
                             $rootScope.currentUser = null;

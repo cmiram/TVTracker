@@ -6,10 +6,12 @@
     function UserHomeController($location, $routeParams, $rootScope, UserService) {
         var vm = this;
         vm.route = $routeParams;
+        vm.user = $rootScope.currentUser;
+        console.log(vm.user);
         function init() {
 
         }
         init();
     }
-    vm.user = UserService.findUserById(vm.route.uid);
+
 })();

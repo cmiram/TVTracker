@@ -47,17 +47,17 @@ module.exports = function() {
         return User.remove({_id: userId});
     }
 
-    function pushShow(userId, showId) {
+    function pushShow(userId, name, tmdbId) {
         return User.update(
             {_id: userId},
-            {$pushAll: {shows: [showId]}}
+            {$pushAll: {shows: [{name: name, tmdbId: tmdbId}]}}
         );
     }
 
-    function pullShow(userId, showId) {
+    function pullShow(userId, name, tmdbId) {
         return User.update(
             {_id: userId},
-            {$pullAll: {shows: [showId]}}
+            {$pullAll: {shows: [{name: name, tmdbId: tmdbId}]}}
         );
     }
 

@@ -1,16 +1,22 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                Profile
+            <a class="navbar-brand">
+                {{model.user.username}}
             </a>
-            <p class="navbar-text pull-right">
-                <a ng-click=""
-                   class="navbar-link">
-                  <span class="glyphicon glyphicon-ok">
-                  </span>
-                </a>
-            </p>
+            <div class="input-group pull-right">
+                <input ng-model="searchText"
+                       type="text"
+                       class="form-control"
+                       placeholder="Search for Shows">
+                <span class="input-group-btn">
+                    <a ng-click="model.searchShows(searchText)"
+                       class="btn btn-default"
+                       type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </a>
+                </span>
+            </div>
         </div>
     </div>
 </nav>

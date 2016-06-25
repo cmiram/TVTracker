@@ -7,7 +7,10 @@ module.exports = function () {
         firstName: String,
         lastName: String,
         email: String,
-        shows: [Number],
+        shows: [{
+            name: String,
+            tmdbId: Number
+        }],
         follows: [{
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User'

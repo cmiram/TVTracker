@@ -1,3 +1,23 @@
+<html lang="en" ng-app="WebAppMakerApp">
+<script src="/js/angular.js"></script>
+<script src="/js/angular-route.js"></script>
+<script src="/js/angucomplete-alt.min.js"></script>
+<script src="/directives/jga-directives.js"></script>
+<script src="/js/textAngular-rangy.min.js"></script>
+<script src="/js/textAngular-sanitize.min.js"></script>
+<script src="/js/textAngular.min.js"></script>
+<script>
+    angular.module ("TVTracker", ["ngRoute", "tvtDirectives"]);
+</script>
 still working
 
-<% %>
+<% (function () {
+    angular.module("TVTracker")
+    (function ($http) {
+
+
+        $http.get("/api/tmdb/popular")
+    })();
+})();
+%>
+</html>

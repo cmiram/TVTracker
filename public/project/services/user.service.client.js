@@ -47,12 +47,8 @@
             return $http.post(url, user);
         }
 
-        function register(username, password) {
+        function register(user) {
             var url = "/api/register";
-            var user = {
-                username: username,
-                password: password
-            };
             return $http.post(url, user);
         }
 

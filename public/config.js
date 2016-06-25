@@ -31,6 +31,14 @@
                     loggedin: checkLoggedin
                 }
             })
+            .when("/shows/browse", {
+                templateUrl: "project/views/TVshows/browse-shows.view.client.html",
+                controller: "UserEdirController",
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
+            })
             .otherwise({
 
                 redirectTo: "/home"

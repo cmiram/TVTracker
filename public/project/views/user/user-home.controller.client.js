@@ -11,4 +11,5 @@
         }
         init();
     }
+    vm.user = UserService.findUserById(vm.route.uid);
 })();

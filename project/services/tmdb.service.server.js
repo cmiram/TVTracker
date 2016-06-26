@@ -1,7 +1,159 @@
 module.exports = function(app) {
-    var http = require('http');
-    var https = require('https');
-    
+    var request = require('request');
     var apiKey = process.env.TMDB_API_KEY;
-    var baseUrl = "https://api.themoviedb.org/3/";
+
+    var baseUrl = "https://api.themoviedb.org/3/tv/";
+    var endUrl = "?api_key=" + apiKey;
+
+    app.get('/api/tmdb/onTheAir', nextSevenDays);
+    app.get('/api/tmdb/airingToday', airingToday);
+    app.get('/api/tmdb/topRated', topRated);
+    app.get('/api/tmdb/popular', popular);
+    app.get('/api/tmdb/:id', showInfo);
+    app.get('/api/tmdb/:id/contentRating', contentRating);
+    app.get('/api/tmdb/:id/credits', credits);
+    app.get('/api/tmdb/:id/externalIds', externalIds);
+    app.get('/api/tmdb/:id/images', showImages);
+    app.get('/api/tmdb/:id/similar', similarShows);
+    app.get('/api/tmdb/:id/videos', videos);
+
+    function showInfo(req, res) {
+        var id = req.params.id;
+        var url = baseUrl + id + endUrl;
+        request(url, function(error, response, body) {
+            if(!error && response.statusCode == 200) {
+                res.json(body);
+            }
+            else {
+                res.status(400).send('error with api call');
+            }
+        });
+    }
+
+    function contentRating(req, res) {
+        var id = req.params.id;
+        var url = baseUrl + id + '/content_ratings/' + endUrl;
+        request(url, function(error, response, body) {
+            if(!error && response.statusCode == 200) {
+                res.json(body);
+            }
+            else {
+                res.status(400).send('error with api call');
+            }
+        });
+    }
+
+    function credits(req, res) {
+        var id = req.params.id;
+        var url = baseUrl + id + '/credits/' + endUrl;
+        request(url, function(error, response, body) {
+            if(!error && response.statusCode == 200) {
+                res.json(body);
+            }
+            else {
+                res.status(400).send('error with api call');
+            }
+        });
+    }
+
+    function externalIds(req, res) {
+        var id = req.params.id;
+        var url = baseUrl + id + '/external_ids/' + endUrl;
+        request(url, function(error, response, body) {
+            if(!error && response.statusCode == 200) {
+                res.json(body);
+            }
+            else {
+                res.status(400).send('error with api call');
+            }
+        });
+    }
+
+    function showImages(req, res) {
+        var id = req.params.id;
+        var url = baseUrl + id + '/images/' + endUrl;
+        request(url, function(error, response, body) {
+            if(!error && response.statusCode == 200) {
+                res.json(body);
+            }
+            else {
+                res.status(400).send('error with api call');
+            }
+        });
+    }
+
+    function similarShows(req, res) {
+        var id = req.params.id;
+        var url = baseUrl + id + '/similar/' + endUrl;
+        request(url, function(error, response, body) {
+            if(!error && response.statusCode == 200) {
+                res.json(body);
+            }
+            else {
+                res.status(400).send('error with api call');
+            }
+        });
+    }
+
+    function videos(req, res) {
+        var id = req.params.id;
+        var url = baseUrl + id + '/videos/' + endUrl;
+        request(url, function(error, response, body) {
+            if(!error && response.statusCode == 200) {
+                res.json(body);
+            }
+            else {
+                res.status(400).send('error with api call');
+            }
+        });
+    }
+
+    function nextSevenDays(req, res) {
+        var url = baseUrl + 'on_the_air/' + endUrl;
+        request(url, function(error, response, body) {
+            if(!error && response.statusCode == 200) {
+                res.json(body);
+            }
+            else {
+                res.status(400).send('error with api call');
+            }
+        });
+    }
+
+    function airingToday(req, res) {
+        var url = baseUrl + 'airing_today/' + endUrl;
+        request(url, function(error, response, body) {
+            if(!error && response.statusCode == 200) {
+                res.json(body);
+            }
+            else {
+                res.status(400).send('error with api call');
+            }
+        });
+    }
+
+    function topRated(req, res) {
+        var url = baseUrl + 'top_rated/' + endUrl;
+        console.log(url);
+        request(url, function(error, response, body) {
+            if(!error && response.statusCode == 200) {
+                res.json(body);
+            }
+            else {
+                res.status(400).send('error with api call');
+            }
+        });
+    }
+
+    function popular(req, res) {
+        var url = baseUrl + 'popular/' + endUrl;
+        request(url, function(error, response, body) {
+            if(!error && response.statusCode == 200) {
+                res.json(body);
+            }
+            else {
+                res.status(400).send('error with api call');
+            }
+        });
+    }
 };

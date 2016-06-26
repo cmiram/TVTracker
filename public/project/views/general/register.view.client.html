@@ -8,16 +8,24 @@
     <input ng-model="username"
            type="text"
            placeholder="username"
-           class="form-control"/>
+           class="form-control"
+           required/>
+    <input ng-model="email"
+           type="email"
+           placeholder="email"
+           class="form-control"
+           required/>
     <input ng-model="password"
            type="password"
            placeholder="password"
-           class="form-control"/>
+           class="form-control"
+           required/>
     <input ng-model="passwordVerify"
            type="password"
            placeholder="verify password"
-           class="form-control"/>
-    <a ng-click="model.register(username, password, passwordVerify)"
+           class="form-control"
+           required/>
+    <a ng-click="model.register(username, email, password, passwordVerify)"
        class="btn btn-primary btn-block">Register</a>
     <a class="btn btn-danger btn-block"
        href="#/home">Cancel</a>

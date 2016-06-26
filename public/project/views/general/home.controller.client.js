@@ -3,12 +3,11 @@
         .module("TVTracker")
         .controller("HomeController", HomeController);
 
-    function HomeController($location, $sce, UserService) {
+    function HomeController($location, $rootScope, $sce, UserService) {
         var vm = this;
         vm.getBackdropUrl = getBackdropUrl;
         vm.getFirstUrl = getFirstUrl;
-
-        var apiKey = "77c6e46c7c8297c719b1cd52b441fcb8"; //process.env.API_KEY;
+        vm.login = logins;
         
         function init() {
             UserService
@@ -22,6 +21,24 @@
                 });
         }
         init();
+
+        function logins(username, password) {
+            UserService
+                .login(username, password)
+                .then(
+                    function(response) {
+                        var user = response.data;
+                        if(user) {
+                            $rootScope.currentUser = user;
+                            var id = user._id;
+                            $location.url("/user/home/" + id);
+                        }
+                    },
+                    function (error) {
+                        vm.error = "User not found";
+                    }
+                );
+        }
 
         function getFirstUrl() {
             var show = vm.popShows[0];

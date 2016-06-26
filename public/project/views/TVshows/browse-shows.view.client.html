@@ -1,0 +1,19 @@
+<div>
+    <ng-include src="'project/views/DRYhtml/header.view.client.html'"></ng-include>
+</div>
+
+
+<div class="container">
+
+
+    <div class="col-xs-3" ng-repeat="show in model.shows">
+        <img src="https://image.tmdb.org/t/p/w370/{{show.poster_path}}"/>
+        {{show.name}}
+
+    </div>
+
+
+</div>
+<div>
+    <ng-include src="'project/views/DRYhtml/footer.view.client.html'"></ng-include>
+</div>

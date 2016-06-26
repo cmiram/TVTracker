@@ -10,20 +10,18 @@
         vm.user = $rootScope.currentUser;
 
         function init() {
-            vm.shows = TmdbService
+            TmdbService
                 .popular()
                 .then(
                     function (res) {
-                        data = res.data;
-                        data = JSON.parse(data);
-                        vm.shows= data;
-                        return data;
+                        console.log(JSON.parse(res.data).results);
+                        vm.shows =  JSON.parse(res.data).results;
+                        //vm.shows = vm.shows
                     }
                 );
         }
         init();
-        var shows = vm.shows;
-        console.log(shows);
+
     }
 
 })();

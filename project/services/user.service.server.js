@@ -17,7 +17,7 @@ module.exports = function(app,models) {
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
     app.put('/api/:userId/followShow/:name/:tmdbId', pushShow);
-    app.delete('/api/:userId/unfollowShow/:name/:tmdbId', pullShow);
+    app.delete('/api/:userId/unfollowShow/:name/:tmdbId/:objId', pullShow);
     app.put('/api/:userId/follow/:followId', pushFollow);
     app.delete('/api/:userId/unfollow/:followId', pullFollow);
 
@@ -311,9 +311,10 @@ module.exports = function(app,models) {
         var name = req.params.name;
         var tmdbId = req.params.tmdbId;
         var userId = req.params.userId;
-
+        var objId = req.params.objId;
+        
         userModel
-            .pullShow(userId, name, tmdbId)
+            .pullShow(userId, name, tmdbId, objId)
             .then(function() {
                 res.send(200);
             },

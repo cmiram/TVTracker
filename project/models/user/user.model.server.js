@@ -54,10 +54,18 @@ module.exports = function() {
         );
     }
 
-    function pullShow(userId, name, tmdbId) {
+    function pullShow(userId, name, tmdbId, objId) {
         return User.update(
             {_id: userId},
-            {$pullAll: {shows: [{name: name, tmdbId: tmdbId}]}}
+            {$pullAll: {
+                shows: [{
+                    _id: objId,
+                    name: name,
+                    tmdbId: tmdbId
+                }]
+
+                }
+            }
         );
     }
 

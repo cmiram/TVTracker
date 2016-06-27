@@ -5,21 +5,23 @@ module.exports = function(app) {
     var baseUrl = "https://api.themoviedb.org/3/tv/";
     var endUrl = "?api_key=" + apiKey;
 
-    app.get('/api/tmdb/onTheAir', nextSevenDays);
-    app.get('/api/tmdb/airingToday', airingToday);
-    app.get('/api/tmdb/topRated', topRated);
-    app.get('/api/tmdb/popular', popular);
-    app.get('/api/tmdb/:id', showInfo);
+
     app.get('/api/tmdb/:id/contentRating', contentRating);
     app.get('/api/tmdb/:id/credits', credits);
     app.get('/api/tmdb/:id/externalIds', externalIds);
     app.get('/api/tmdb/:id/images', showImages);
     app.get('/api/tmdb/:id/similar', similarShows);
     app.get('/api/tmdb/:id/videos', videos);
+    app.get('/api/tmdb/:id', showInfo);
+    app.get('/api/tmdb/onTheAir', nextSevenDays);
+    app.get('/api/tmdb/airingToday', airingToday);
+    app.get('/api/tmdb/topRated', topRated);
+    app.get('/api/tmdb/popular', popular);
 
     function showInfo(req, res) {
         var id = req.params.id;
         var url = baseUrl + id + endUrl;
+
         request(url, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
@@ -32,7 +34,8 @@ module.exports = function(app) {
 
     function contentRating(req, res) {
         var id = req.params.id;
-        var url = baseUrl + id + '/content_ratings/' + endUrl;
+        var url = baseUrl + id + '/content_ratings' + endUrl;
+
         request(url, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
@@ -45,7 +48,7 @@ module.exports = function(app) {
 
     function credits(req, res) {
         var id = req.params.id;
-        var url = baseUrl + id + '/credits/' + endUrl;
+        var url = baseUrl + id + '/credits' + endUrl;
         request(url, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
@@ -58,7 +61,7 @@ module.exports = function(app) {
 
     function externalIds(req, res) {
         var id = req.params.id;
-        var url = baseUrl + id + '/external_ids/' + endUrl;
+        var url = baseUrl + id + '/external_ids' + endUrl;
         request(url, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
@@ -71,7 +74,7 @@ module.exports = function(app) {
 
     function showImages(req, res) {
         var id = req.params.id;
-        var url = baseUrl + id + '/images/' + endUrl;
+        var url = baseUrl + id + '/images' + endUrl;
         request(url, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
@@ -84,7 +87,7 @@ module.exports = function(app) {
 
     function similarShows(req, res) {
         var id = req.params.id;
-        var url = baseUrl + id + '/similar/' + endUrl;
+        var url = baseUrl + id + '/similar' + endUrl;
         request(url, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
@@ -97,7 +100,7 @@ module.exports = function(app) {
 
     function videos(req, res) {
         var id = req.params.id;
-        var url = baseUrl + id + '/videos/' + endUrl;
+        var url = baseUrl + id + '/videos' + endUrl;
         request(url, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
@@ -109,7 +112,7 @@ module.exports = function(app) {
     }
 
     function nextSevenDays(req, res) {
-        var url = baseUrl + 'on_the_air/' + endUrl;
+        var url = baseUrl + 'on_the_air' + endUrl;
         request(url, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
@@ -121,7 +124,7 @@ module.exports = function(app) {
     }
 
     function airingToday(req, res) {
-        var url = baseUrl + 'airing_today/' + endUrl;
+        var url = baseUrl + 'airing_today' + endUrl;
         request(url, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
@@ -133,7 +136,7 @@ module.exports = function(app) {
     }
 
     function topRated(req, res) {
-        var url = baseUrl + 'top_rated/' + endUrl;
+        var url = baseUrl + 'top_rated' + endUrl;
         request(url, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
@@ -145,7 +148,7 @@ module.exports = function(app) {
     }
 
     function popular(req, res) {
-        var url = baseUrl + 'popular/' + endUrl;
+        var url = baseUrl + 'popular' + endUrl;
         request(url, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 res.json(body);

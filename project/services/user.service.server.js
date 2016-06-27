@@ -16,8 +16,8 @@ module.exports = function(app,models) {
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
     app.delete("/api/user/:userId", deleteUser);
-    app.put('/api/:userId/followShow/:showId/', pushShow);
-    app.delete('/api/:userId/unfollowShow/:showId', pullShow);
+    app.put('/api/:userId/followShow/:name/:tmdbId', pushShow);
+    app.delete('/api/:userId/unfollowShow/:name/:tmdbId/:objId', pullShow);
     app.put('/api/:userId/follow/:followId', pushFollow);
     app.delete('/api/:userId/unfollow/:followId', pullFollow);
 
@@ -293,11 +293,12 @@ module.exports = function(app,models) {
     }
 
     function pushShow(req, res) {
-        var showId = req.params.showId;
+        var name = req.params.name;
+        var tmdbId = req.params.tmdbId;
         var userId = req.params.userId;
 
         userModel
-            .pushShow(userId, showId)
+            .pushShow(userId, name, tmdbId)
             .then(function() {
                 res.send(200);
             },
@@ -307,11 +308,13 @@ module.exports = function(app,models) {
     }
 
     function pullShow(req, res) {
-        var showId = req.params.showId;
+        var name = req.params.name;
+        var tmdbId = req.params.tmdbId;
         var userId = req.params.userId;
-
+        var objId = req.params.objId;
+        
         userModel
-            .pullShow(userId, showId)
+            .pullShow(userId, name, tmdbId, objId)
             .then(function() {
                 res.send(200);
             },

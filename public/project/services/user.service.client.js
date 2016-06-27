@@ -15,7 +15,9 @@
             findUserByUsernameAndPassword: findUserByUsernameAndPassword,
             findUserById: findUserById,
             updateUser: updateUser,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            pushShow: pushShow,
+            pullShow: pullShow
         };
         return api;
 
@@ -66,6 +68,16 @@
         function findUserById(id) {
             var url = "/api/user/" + id;
             return $http.get(url);
+        }
+        
+        function pushShow(userId, name, tmdbId) {
+            var url = "/api/" + userId + "/followShow/" + name + "/" + tmdbId;
+            return $http.put(url);
+        }
+
+        function pullShow(userId, name, tmdbId, objId) {
+            var url = "/api/" + userId + "/unfollowShow/" + name + "/" + tmdbId + '/' + objId;
+            return $http.delete(url);
         }
     }
 })();

@@ -1,14 +1,30 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-head">
+            <p class="navbar-text pull-left">
+                <a href="#/user/home/{{model.user._id}}">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand">
+                Profile
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.updateUser(model.user)" class="navbar-link">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
 
-<div>
-    <ng-include src="'project/views/DRYhtml/header.view.client.html'"></ng-include>
-</div>
 <div class="container">
 
-    <div ng-show="model.success" class="alert alert-success">
+    <div ng-if="model.success" class="alert alert-success">
         {{model.success}}
     </div>
 
-    <div ng-show="model.error" class="alert alert-danger">
+    <div ng-if="model.error" class="alert alert-danger">
         {{model.error}}
     </div>
 
@@ -46,4 +62,8 @@
                    placeholder="Wonderland"/>
         </div>
     </form>
+</div>
+
+<div>
+    <ng-include src="'project/views/DRYhtml/footer.view.client.html'"></ng-include>
 </div>

@@ -8,8 +8,9 @@
         vm.getBackdropUrl = getBackdropUrl;
         vm.getFirstUrl = getFirstUrl;
         vm.login = logins;
-        
+
         function init() {
+
             UserService
                 .getPopShows()
                 .then(function(res) {
@@ -54,8 +55,8 @@
             interval: false
         });
 
-        // for every slide in carousel, copy the next slide's item in the slide.
-        // Do the same for the next, next item.
+// for every slide in carousel, copy the next slide's item in the slide.
+// Do the same for the next, next item.
         $('.multi-item-carousel .item').each(function () {
             var next = $(this).next();
             if (!next.length) {

@@ -39,9 +39,14 @@
                     loggedin: checkLoggedin
                 }
             })
-            .when("/shows/browse", {
+            .when("/shows/browse/popular", {
                 templateUrl: "project/views/TVshows/browse-shows.view.client.html",
                 controller: "BrowseShowsController",
+                controllerAs: "model"
+            })
+            .when("/shows/browse/topRated", {
+                templateUrl: "project/views/TVshows/browse-top-rated.view.client.html",
+                controller: "BrowseTopController",
                 controllerAs: "model"
             })
             .when("/shows/browse/:showId", {

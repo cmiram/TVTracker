@@ -6,6 +6,8 @@ module.exports = function(app) {
     var endUrl = "?api_key=" + apiKey;
 
 
+    app.get('/api/tmdb/topRated', topRated);
+    app.get('/api/tmdb/popular', popular);
     app.get('/api/tmdb/search/:query', searchShows);
     app.get('/api/tmdb/:id/contentRating', contentRating);
     app.get('/api/tmdb/:id/credits', credits);
@@ -16,8 +18,6 @@ module.exports = function(app) {
     app.get('/api/tmdb/:id', showInfo);
     app.get('/api/tmdb/onTheAir', nextSevenDays);
     app.get('/api/tmdb/airingToday', airingToday);
-    app.get('/api/tmdb/topRated', topRated);
-    app.get('/api/tmdb/popular', popular);
 
     function searchShows(req, res) {
         var query = req.params.query;
@@ -151,7 +151,7 @@ module.exports = function(app) {
     }
 
     function topRated(req, res) {
-        var url = baseUrl + 'top_rated' + endUrl;
+        var url = baseUrl + 'top_rated' + endUrl;;
         request(url, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 res.json(body);

@@ -1,4 +1,4 @@
-<nav ng-show="{{model.user}}" class="navbar navbar-default navbar-fixed-bottom">
+<nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-footer">
             <p class="navbar-text pull-left">
@@ -6,7 +6,7 @@
                     <span class="glyphicon glyphicon-home"></span>
                 </a>
             </p>
-            <p class="navbar-text pull-right">
+            <p ng-show="{{model.user}}"  class="navbar-text pull-right">
                 <a href="#/user/home/{{model.user._id}/edit" class="navbar-link">
                       <span class="glyphicon glyphicon-user"></span>
                 </a>

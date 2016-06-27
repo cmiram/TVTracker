@@ -15,19 +15,19 @@
     </div>
 </div>
 
-<nav ng-show="{{model.user}}" class="navbar navbar-default navbar-fixed-bottom">
+<nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container-fluid">
         <div class="navbar-footer">
             <p class="navbar-text pull-left">
                 <a href="#/user/home/{{model.user._id}}" class="navbar-link">
                     <span class="glyphicon glyphicon-home"></span>
                 </a>
-                <a ng-if="model.user" ng-click="model.toggleFollow()" class="navbar-link follow-icon">
+                <a ng-show="model.user" ng-click="model.toggleFollow()" class="navbar-link follow-icon">
                     <span ng-if="model.isFollowing" class="glyphicon glyphicon-heart" style="color:red"></span>
                     <span ng-if="!model.isFollowing" class="glyphicon glyphicon-heart"></span>
                 </a>
             </p>
-            <p class="navbar-text pull-right">
+            <p ng-show="{{model.user}}"  class="navbar-text pull-right">
                 <a href="#/user/home/{{model.user._id}}/edit" class="navbar-link">
                     <span class="glyphicon glyphicon-user"></span>
                 </a>

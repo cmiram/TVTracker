@@ -83,11 +83,13 @@
                             return null;
                         }
                         else{
+                            //console.log(show);
                             show.tmdbId = getTmdbIdFromUserArray(show.episode.show.epguide_name);
                             return show;
                         }
                     })
                     .then(function(show) {
+                        //console.log(show);
                         if(show) {
                             TmdbService
                                 .showImages(show.tmdbId)
@@ -104,11 +106,25 @@
 
         function getTmdbIdFromUserArray(name) {
             for(var i in vm.user.shows) {
-                if(name.toUpperCase() === vm.user.shows[i].name.toUpperCase()) {
+                if(name.toUpperCase() === vm.user.shows[i].name.toUpperCase() || isSubstring(name, vm.user.shows[i].name)) {
                     return vm.user.shows[i].tmdbId;
                 }
             }
             return null;
+        }
+
+        function isSubstring(str1, str2) {
+            str1 = str1.toUpperCase();
+            str2 = str2.toUpperCase();
+
+            if(str1.indexOf(str2) > -1) {
+                return true;
+            }
+            if(str2.indexOf(str1) > -1) {
+                return true;
+            }
+
+            return false;
         }
 
         function getShowArt(show) {

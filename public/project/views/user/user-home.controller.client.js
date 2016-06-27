@@ -79,18 +79,26 @@
                     .nextEpisode(name)
                     .then(function(res) {
                         var show = JSON.parse(res.data);
-                        show.tmdbId = getTmdbIdFromUserArray(show.episode.show.epguide_name);
-                        return show;
+                        if(show.error) {
+                            return null;
+                        }
+                        else{
+                            show.tmdbId = getTmdbIdFromUserArray(show.episode.show.epguide_name);
+                            return show;
+                        }
                     })
                     .then(function(show) {
-                        TmdbService
-                            .showImages(show.tmdbId)
-                            .then(function(res) {
-                                var images = res.data;
-                                images = JSON.parse(images);
-                                show.backdropFilePath = images.backdrops[0].file_path;
-                                vm.showListByNextEpisode.push(show);
-                            });
+                        if(show) {
+                            TmdbService
+                                .showImages(show.tmdbId)
+                                .then(function(res) {
+                                    var images = res.data;
+                                    images = JSON.parse(images);
+                                    show.backdropFilePath = images.backdrops[0].file_path;
+                                    vm.showListByNextEpisode.push(show);
+                                    console.log(vm.showListByNextEpisode);
+                                });
+                        }
                     });
             }
         }

@@ -10,8 +10,7 @@
                 if(password === passconfirm) {
                     var user = {
                         username: username,
-                        password: password,
-                        email: email
+                        password: password
                     };
                     UserService
                         .register(user)

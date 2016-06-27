@@ -18,7 +18,7 @@
                             function(response){
                                 var user = response.data;
                                 $rootScope.currentUser = user;
-                                $location.url("/user/profile/"+user._id);
+                                login($rootScope.currentUser.username, $rootScope.currentUser.password);
                             },
                             function(error){
                                 vm.error = error.data;
@@ -30,5 +30,22 @@
                 }
             }
 
+            function login(username, password) {
+                UserService
+                    .login(username, password)
+                    .then(
+                        function(response) {
+                            var user = response.data;
+                            if(user) {
+                                $rootScope.currentUser = user;
+                                var id = user._id;
+                                $location.url("/user/home/" + id);
+                            }
+                        },
+                        function (error) {
+                            vm.error = "User not found";
+                        }
+                    );
+            }
         }
     })();

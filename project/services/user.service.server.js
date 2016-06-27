@@ -160,42 +160,15 @@ module.exports = function(app,models) {
     }
 
     function register(req, res) {
-        var username = req.body.username;
-        var password = req.body.password;
+        var newUser = req.body;
         userModel
-            .findUserByUsername(username)
-            .then(
-                function(user) {
-                    if(user) {
-                        res.status(400).send("Username already exists");
-                        return;
-                    } else {
-                        req.body.password = bcrypt.hashSync(password);
-                        res.send(200);
-                        return userModel
-                            .createUser(req.body);
-                    }
-                },
-                function(error) {
-                    res.status(400).send(error);
-                }
-            )
-            .then(
-                function(user) {
-                    if(user){
-                        req.login(user, function(err) {
-                            if(err) {
-                                res.status(400).send(err);
-                            } else {
-                                res.json(user);
-                            }
-                        });
-                    }
-                },
-                function(error) {
-                    res.status(400).send(error);
-                }
-            )
+            .createUser(newUser)
+            .then(function(user) {
+                res.json(user);
+            },
+            function(error) {
+                res.status(400).send('unable to create user');
+            });
     }
 
     function login(req, res) {

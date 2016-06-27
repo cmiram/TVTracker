@@ -2,7 +2,6 @@ module.exports = function(app,models) {
     var userModel = models.userModel;
     var passport      = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
-    var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
     var bcrypt = require("bcrypt-nodejs");
 
@@ -26,13 +25,6 @@ module.exports = function(app,models) {
             failureRedirect : '/#/home'
         }));
 
-    app.get('/auth/google', passport.authenticate('google', { scope : 'email' }));
-    app.get('/auth/google/callback',
-        passport.authenticate('google', {
-            successRedirect: '/#/user/home',
-            failureRedirect: '/#/home'
-        }));
-
     var facebookConfig = {
         clientID     : process.env.FACEBOOK_CLIENT_ID,
         clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
@@ -48,7 +40,6 @@ module.exports = function(app,models) {
     };
     passport.use('tvt', new LocalStrategy(localStrategy));
     passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-    passport.use(new GoogleStrategy(googleConfig, googleStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 

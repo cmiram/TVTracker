@@ -7,10 +7,10 @@ module.exports = function(app,models) {
     var bcrypt = require("bcrypt-nodejs");
 
     app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-    app.post  ('/api/login', passport.authenticate('tvt'), login);
-    app.post  ('/api/logout',         logout);
-    app.post  ('/api/register',       register);
-    app.get   ('/api/loggedin',       loggedin);
+    app.post('/api/login', passport.authenticate('tvt'), login);
+    app.post('/api/logout', logout);
+    app.post('/api/register', register);
+    app.get('/api/loggedin', loggedin);
     app.get("/api/user", getUsers);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
@@ -165,11 +165,11 @@ module.exports = function(app,models) {
         userModel
             .createUser(newUser)
             .then(function(user) {
-                res.json(user);
-            },
-            function(error) {
-                res.status(400).send('unable to create user');
-            });
+                    res.json(user);
+                },
+                function(error) {
+                    res.status(400).send('unable to create user');
+                });
     }
 
     function login(req, res) {
@@ -185,7 +185,7 @@ module.exports = function(app,models) {
     function loggedin(req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');
     }
-    
+
 
     function deleteUser(req, res) {
         var id = req.params.userId;
@@ -274,11 +274,11 @@ module.exports = function(app,models) {
         userModel
             .pushShow(userId, name, tmdbId)
             .then(function() {
-                res.send(200);
-            },
-            function(error) {
-                res.status(400).send("Unable to add show");
-            });
+                    res.send(200);
+                },
+                function(error) {
+                    res.status(400).send("Unable to add show");
+                });
     }
 
     function pullShow(req, res) {
@@ -286,15 +286,15 @@ module.exports = function(app,models) {
         var tmdbId = req.params.tmdbId;
         var userId = req.params.userId;
         var objId = req.params.objId;
-        
+
         userModel
             .pullShow(userId, name, tmdbId, objId)
             .then(function() {
-                res.send(200);
-            },
-            function(error) {
-                res.status(400).send("Unable to remove show");
-            });
+                    res.send(200);
+                },
+                function(error) {
+                    res.status(400).send("Unable to remove show");
+                });
     }
 
     function pushFollow(req, res) {
@@ -304,11 +304,11 @@ module.exports = function(app,models) {
         userModel
             .pushFollow(userId, followId)
             .then(function() {
-                res.send(200);
-            },
-            function(error) {
-                res.status(400).send("Unable to follow user");
-            });
+                    res.send(200);
+                },
+                function(error) {
+                    res.status(400).send("Unable to follow user");
+                });
     }
 
     function pullFollow(req, res) {
@@ -318,10 +318,10 @@ module.exports = function(app,models) {
         userModel
             .pullFollow(userId, followId)
             .then(function() {
-                res.send(200);
-            },
-            function(error) {
-                res.status(400).send("Unable to unfollow user");
-            });
+                    res.send(200);
+                },
+                function(error) {
+                    res.status(400).send("Unable to unfollow user");
+                });
     }
 };

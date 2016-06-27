@@ -12,6 +12,10 @@ body {
     padding-bottom: 60px;
 }
 
+.day-select {
+    padding-bottom: 10px;
+}
+
 .glyphicon-user {
     color: cornflowerblue;
 }

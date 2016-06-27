@@ -25,7 +25,7 @@
             })
             .when("/user/home/:uid/edit", {
                 templateUrl: "project/views/user/user-edit.view.client.html",
-                controller: "UserEdirController",
+                controller: "UserEditController",
                 controllerAs: "model",
                 resolve: {
                     loggedin: checkLoggedin

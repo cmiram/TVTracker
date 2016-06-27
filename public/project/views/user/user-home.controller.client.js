@@ -96,7 +96,6 @@
                                     images = JSON.parse(images);
                                     show.backdropFilePath = images.backdrops[0].file_path;
                                     vm.showListByNextEpisode.push(show);
-                                    console.log(vm.showListByNextEpisode);
                                 });
                         }
                     });

@@ -11,6 +11,7 @@
         vm.getShowArt = getShowArt;
         vm.navigateToShowPage = navigateToShowPage;
         vm.results = [];
+        vm.searchShows = searchShows;
 
         function init() {
             var query = $routeParams.query;
@@ -20,7 +21,6 @@
                 .then(
                     function (res) {
                         vm.results =  JSON.parse(res.data).results;
-                        console.log(vm.results);
                     }
                 );
         }
@@ -35,6 +35,27 @@
                 var baseUrl = "http://image.tmdb.org/t/p/original/";
                 return $sce.trustAsResourceUrl(baseUrl + show.backdrop_path);
             }
+            else {
+                return $sce.trustAsResourceUrl('/project/resources/no_image_available.png');
+            }
+        }
+
+        function searchShows(query) {
+            query = replaceSpaces(query);
+            $location.url('/shows/search/' + query);
+        }
+
+        function replaceSpaces(str) {
+            var result = '';
+            for(var i in str) {
+                if(str[i] == ' ') {
+                    result = result + '%20';
+                }
+                else {
+                    result = result + str[i];
+                }
+            }
+            return result;
         }
     }
 

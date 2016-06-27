@@ -7,6 +7,7 @@
         var vm = this;
         vm.route = $routeParams;
         vm.updateUser = updateUser;
+        vm.searchShows = searchShows;
         
         function init() {
             vm.user = $rootScope.currentUser;
@@ -22,6 +23,24 @@
                 function(err) {
                     vm.error = 'Unable to Update Profile';
                 });
+        }
+
+        function searchShows(query) {
+            query = replaceSpaces(query);
+            $location.url('/shows/search/' + query);
+        }
+
+        function replaceSpaces(str) {
+            var result = '';
+            for(var i in str) {
+                if(str[i] == ' ') {
+                    result = result + '%20';
+                }
+                else {
+                    result = result + str[i];
+                }
+            }
+            return result;
         }
     }
 

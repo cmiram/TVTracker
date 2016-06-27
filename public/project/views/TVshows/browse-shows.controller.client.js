@@ -10,6 +10,7 @@
         vm.user = $rootScope.currentUser;
         vm.getShowArt = getShowArt;
         vm.navigateToShowPage = navigateToShowPage;
+        vm.searchShows = searchShows;
 
         function init() {
             TmdbService
@@ -27,8 +28,31 @@
         }
 
         function getShowArt(show) {
-            var baseUrl = "http://image.tmdb.org/t/p/original/";
-            return $sce.trustAsResourceUrl(baseUrl + show.backdrop_path);
+            if(show.backdrop_path) {
+                var baseUrl = "http://image.tmdb.org/t/p/original/";
+                return $sce.trustAsResourceUrl(baseUrl + show.backdrop_path);
+            }
+            else {
+                return $sce.trustAsResourceUrl('/project/resources/no_image_available.png');
+            }
+        }
+
+        function searchShows(query) {
+            query = replaceSpaces(query);
+            $location.url('/shows/search/' + query);
+        }
+
+        function replaceSpaces(str) {
+            var result = '';
+            for(var i in str) {
+                if(str[i] == ' ') {
+                    result = result + '%20';
+                }
+                else {
+                    result = result + str[i];
+                }
+            }
+            return result;
         }
     }
 

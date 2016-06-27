@@ -12,6 +12,7 @@
         vm.daySelectedEvent = daySelectedEvent;
         vm.getFollowerUsername = getFollowerUsername;
         vm.navigateToShowPage = navigateToShowPage;
+        vm.searchShows = searchShows;
 
         function init() {
             vm.user = $rootScope.currentUser;
@@ -104,8 +105,13 @@
         }
 
         function getShowArt(show) {
-            var baseUrl = "http://image.tmdb.org/t/p/original/";
-            return $sce.trustAsResourceUrl(baseUrl + show.backdropFilePath);
+            if(show.backdropFilePath) {
+                var baseUrl = "http://image.tmdb.org/t/p/original/";
+                return $sce.trustAsResourceUrl(baseUrl + show.backdropFilePath);
+            }
+            else {
+                return $sce.trustAsResourceUrl('/project/resources/no_image_available.png');
+            }
         }
         
         function getFollowerUsername(user) {
@@ -118,6 +124,24 @@
 
         function navigateToShowPage(show) {
             $location.url('/shows/browse/' + show.tmdbId);
+        }
+
+        function searchShows(query) {
+            query = replaceSpaces(query);
+            $location.url('/shows/search/' + query);
+        }
+
+        function replaceSpaces(str) {
+            var result = '';
+            for(var i in str) {
+                if(str[i] == ' ') {
+                    result = result + '%20';
+                }
+                else {
+                    result = result + str[i];
+                }
+            }
+            return result;
         }
     }
 

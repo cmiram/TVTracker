@@ -6,7 +6,6 @@ module.exports = function(app,models) {
     var FacebookStrategy = require('passport-facebook').Strategy;
     var bcrypt = require("bcrypt-nodejs");
 
-    app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
     app.post('/api/login', passport.authenticate('tvt'), login);
     app.post('/api/logout', logout);
     app.post('/api/register', register);
@@ -27,6 +26,7 @@ module.exports = function(app,models) {
             failureRedirect : '/#/home'
         }));
 
+    app.get('/auth/google', passport.authenticate('google', { scope : 'email' }));
     app.get('/auth/google/callback',
         passport.authenticate('google', {
             successRedirect: '/#/user/home',

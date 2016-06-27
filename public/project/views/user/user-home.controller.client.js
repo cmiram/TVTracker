@@ -11,6 +11,7 @@
         vm.daysToCheck = setDaysArray();
         vm.daySelectedEvent = daySelectedEvent;
         vm.getFollowerUsername = getFollowerUsername;
+        vm.navigateToShowPage = navigateToShowPage;
 
         function init() {
             vm.user = $rootScope.currentUser;
@@ -95,7 +96,7 @@
 
         function getTmdbIdFromUserArray(name) {
             for(var i in vm.user.shows) {
-                if(name === vm.user.shows[i].name) {
+                if(name.toUpperCase() === vm.user.shows[i].name.toUpperCase()) {
                     return vm.user.shows[i].tmdbId;
                 }
             }
@@ -103,7 +104,7 @@
         }
 
         function getShowArt(show) {
-            var baseUrl = "http://image.tmdb.org/t/p/w370/";
+            var baseUrl = "http://image.tmdb.org/t/p/original/";
             return $sce.trustAsResourceUrl(baseUrl + show.backdropFilePath);
         }
         
@@ -113,6 +114,10 @@
                 .then(function(user) {
                     return user.username;
                 });
+        }
+
+        function navigateToShowPage(show) {
+            $location.url('/shows/browse/' + show.tmdbId);
         }
     }
 

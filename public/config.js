@@ -39,6 +39,14 @@
                     loggedin: checkLoggedin
                 }
             })
+            .when("/shows/browse/:showId", {
+                templateUrl: "project/views/TVshows/specific-show.view.client.html",
+                controller: "SpecificShowController",
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
+            })
             .otherwise({
 
                 redirectTo: "/home"

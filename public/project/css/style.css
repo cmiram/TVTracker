@@ -32,6 +32,10 @@ body {
     color: cornflowerblue;
 }
 
+.follow-icon {
+    padding-left: 20px;
+}
+
 .input-group {
     width: 55%;
     margin-top: 10px;

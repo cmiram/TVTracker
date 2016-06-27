@@ -9,7 +9,7 @@ module.exports = function () {
         email: String,
         shows: [{
             name: String,
-            tmdbId: Number
+            tmdbId: String
         }],
         follows: [{
             type: mongoose.Schema.Types.ObjectId,

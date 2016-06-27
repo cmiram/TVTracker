@@ -18,7 +18,8 @@
             nextSevenDays: nextSevenDays,
             airingToday: airingToday,
             topRated: topRated,
-            popular: popular
+            popular: popular,
+            searchShows: searchShows
         };
         return api;
 
@@ -74,6 +75,11 @@
 
         function popular() {
             var url = baseUrl + 'popular';
+            return $http.get(url);
+        }
+        
+        function searchShows(query) {
+            var url = baseUrl + 'search/' + query;
             return $http.get(url);
         }
     }

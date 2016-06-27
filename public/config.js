@@ -47,6 +47,14 @@
                     loggedin: checkLoggedin
                 }
             })
+            .when("/shows/search/:query", {
+                templateUrl: "project/views/TVshows/search-shows.view.client.html",
+                controller: "SearchShowsController",
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
+            })
             .otherwise({
 
                 redirectTo: "/home"

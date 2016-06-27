@@ -6,6 +6,7 @@ module.exports = function(app) {
     var endUrl = "?api_key=" + apiKey;
 
 
+    app.get('/api/tmdb/search/:query', searchShows);
     app.get('/api/tmdb/:id/contentRating', contentRating);
     app.get('/api/tmdb/:id/credits', credits);
     app.get('/api/tmdb/:id/externalIds', externalIds);
@@ -17,6 +18,20 @@ module.exports = function(app) {
     app.get('/api/tmdb/airingToday', airingToday);
     app.get('/api/tmdb/topRated', topRated);
     app.get('/api/tmdb/popular', popular);
+
+    function searchShows(req, res) {
+        var query = req.params.query;
+        var url = 'https://api.themoviedb.org/3/' + 'search/tv?query=' + query + '&api_key=' + apiKey;
+        
+        request(url, function(error, response, body) {
+            if(!error && response.statusCode == 200) {
+                res.json(body);
+            }
+            else {
+                res.status(400).send('error with search');
+            }
+        });
+    }
 
     function showInfo(req, res) {
         var id = req.params.id;

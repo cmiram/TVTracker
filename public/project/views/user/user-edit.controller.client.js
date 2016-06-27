@@ -3,11 +3,12 @@
         .module("TVTracker")
         .controller("UserEditController", UserEditController);
 
-    function UserEditController($routeParams, $rootScope, UserService) {
+    function UserEditController($routeParams, $rootScope, $location, UserService) {
         var vm = this;
         vm.route = $routeParams;
         vm.updateUser = updateUser;
         vm.searchShows = searchShows;
+        vm.logout = logout;
         
         function init() {
             vm.user = $rootScope.currentUser;
@@ -41,6 +42,15 @@
                 }
             }
             return result;
+        }
+
+        function logout() {
+            UserService
+                .logout()
+                .then(function(res) {
+                    $rootScope.currentUser = null;
+                    $location.url("/");
+                })
         }
     }
 

@@ -15,6 +15,14 @@
                 controller: "RegisterController",
                 controllerAs: "model"
             })
+            .when("/user/home", {
+                templateUrl: "project/views/user/user-home.view.client.html",
+                controller: "UserHomeController",
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
+            })
             .when("/user/home/:uid", {
                 templateUrl: "project/views/user/user-home.view.client.html",
                 controller: "UserHomeController",

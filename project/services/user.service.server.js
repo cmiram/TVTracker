@@ -7,7 +7,6 @@ module.exports = function(app,models) {
     var bcrypt = require("bcrypt-nodejs");
 
     app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-    app.get ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.post  ('/api/login', passport.authenticate('tvt'), login);
     app.post  ('/api/logout',         logout);
     app.post  ('/api/register',       register);
@@ -21,11 +20,13 @@ module.exports = function(app,models) {
     app.put('/api/:userId/follow/:followId', pushFollow);
     app.delete('/api/:userId/unfollow/:followId', pullFollow);
 
-    app.get('/auth/facebook/callback',
+    app.get("/auth/facebook", passport.authenticate('facebook', {scope : 'email' }));
+    app.get("/auth/facebook/callback",
         passport.authenticate('facebook', {
-            successRedirect: '/#/user/home',
-            failureRedirect: '/#/home'
+            successRedirect : '/#/user/home',
+            failureRedirect : '/#/home'
         }));
+
     app.get('/auth/google/callback',
         passport.authenticate('google', {
             successRedirect: '/#/user/home',

@@ -37,9 +37,6 @@ else {
 }
 mongoose.connect(connectionString);
 
-app.set('view engine', 'ejs');
-
-require('./browseShows/app')(app);
 require('./project/app')(app);
 
 app.listen(port, ipaddress);

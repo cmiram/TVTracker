@@ -20,6 +20,25 @@
                 .then(function(res) {
                     vm.show = JSON.parse(res.data);
                     vm.showArtPath = getShowArt(vm.show);
+                })
+                .then(function() {
+                    EpguidesService
+                        .nextEpisode(removeSpaces(vm.show.name))
+                        .then(function(res) {
+                            vm.nextEpisode = JSON.parse(res.data);
+                        },
+                        function(err) {
+                            vm.nextEpisode = null;
+                        });
+                    EpguidesService
+                        .lastEpisode(removeSpaces(vm.show.name))
+                        .then(function(res) {
+                            vm.lastEpisode = JSON.parse(res.data);
+                        },
+                        function(err) {
+                            vm.lastEpisode = null;
+                        });
+
                 });
         }
         init();

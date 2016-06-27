@@ -5,7 +5,10 @@
 <div class="container">
     <img class="img-rounded" ng-src="{{model.showArtPath}}" alt="N/A">
     <div class="caption">
-        <h3>{{model.show.name}} <h5>Seasons: {{model.show.number_of_seasons}}</h5></h3>
+        <h3>{{model.show.name}}</h3>
+        <h4>Seasons: {{model.show.number_of_seasons}}</h4>
+        <h5 ng-if="model.nextEpisode">Next Episode: {{model.nextEpisode.episode.release_date}}</h5>
+        <h5 ng-if="model.lastEpisode">Last Episode: {{model.lastEpisode.episode.release_date}}</h5>
         <p>{{model.show.overview}}</p>
         <button class="btn btn-danger btn-block" ng-if="model.show.status == 'Ended'">Series is Ended</button>
         <button class="btn btn-success btn-block" ng-if="!(model.show.status == 'Ended')">Series is still running</button>

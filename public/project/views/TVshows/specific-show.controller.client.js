@@ -12,7 +12,9 @@
         function init() {
             vm.user = $rootScope.currentUser;
             vm.tmdbId = $routeParams.showId;
-            vm.isFollowing = checkIfFollowing();
+            if(vm.user) {
+                vm.isFollowing = checkIfFollowing();
+            }
             TmdbService
                 .showInfo(vm.tmdbId)
                 .then(function(res) {

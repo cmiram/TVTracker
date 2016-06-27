@@ -42,31 +42,20 @@
             .when("/shows/browse", {
                 templateUrl: "project/views/TVshows/browse-shows.view.client.html",
                 controller: "BrowseShowsController",
-                controllerAs: "model",
-                resolve: {
-                    loggedin: checkLoggedin
-                }
+                controllerAs: "model"
             })
             .when("/shows/browse/:showId", {
                 templateUrl: "project/views/TVshows/specific-show.view.client.html",
                 controller: "SpecificShowController",
-                controllerAs: "model",
-                resolve: {
-                    loggedin: checkLoggedin
-                }
+                controllerAs: "model"
             })
             .when("/shows/search/:query", {
                 templateUrl: "project/views/TVshows/search-shows.view.client.html",
                 controller: "SearchShowsController",
-                controllerAs: "model",
-                resolve: {
-                    loggedin: checkLoggedin
-                }
+                controllerAs: "model"
             })
             .otherwise({
-
                 redirectTo: "/home"
-        
             });
 
         function checkLoggedin(UserService, $q, $location, $rootScope) {

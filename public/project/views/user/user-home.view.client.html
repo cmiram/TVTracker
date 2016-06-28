@@ -4,6 +4,7 @@
 
 <div class="container">
 
+    <h4>Shows you Watch:</h4>
     <div class="day-select">
         Airing On:
         <select ng-model="daySelected" ng-change="model.daySelectedEvent(daySelected)">
@@ -33,14 +34,24 @@
         </div>
     </div>
 
-    <div class="row" ng-repeat="user in model.user.follows">
-        <div class="col-md-6">
-            {{model.getFollowerUsername(user)}}
-        </div>
+    <div ng-if="model.userFollows.length !== 0">
+        <h4>Users you Follow:</h4>
+        <table class="table-striped">
+            <tr>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+            <tr ng-repeat="user in model.userFollows">
+                <td><a href="/#/user/other/{{user._id}}">{{user.username}}</a></td>
+                <td><a href="/#/user/other/{{user._id}}">{{user.firstName}}</a></td>
+                <td><a href="/#/user/other/{{user._id}}">{{user.lastName}}</a></td>
+            </tr>
+        </table>
     </div>
 
     <div class="row">
-        <div class="input-group pull-right" style="width: 80%">
+        <div class="input-group row-query" style="width: 50%;">
             <input ng-model="userSearch"
                    type="text"
                    class="form-control"
@@ -57,8 +68,25 @@
 
     <div ng-show="model.userNotFound" class="alert alert-danger text-center" style="margin-top: 10px">Username not found</div>
 
-    <a class="btn btn-primary btn-block" href="#/shows/browse/popular">Browse Popular Shows</a>
-    <a class="btn btn-primary btn-block" href="#/shows/browse/topRated">Browse Top Rated Shows</a>
+    <div class="row">
+        <div class="col-md-4" ng-repeat="show in model.popularShows">
+            <a href="/#/shows/browse/{{show.id}}"><img class="img-rounded" ng-src="{{model.getShowArtButtons(show)}}" alt="N/A"></a>
+            <div class="caption text-center">
+                <h3>{{show.name}}</h3>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-primary btn-block" href="/#/shows/browse/popular">Browse More Popular Shows</a>
+
+    <div class="row" style="margin-top: 20px">
+        <div class="col-md-4" ng-repeat="show in model.topRatedShows">
+            <a href="/#/shows/browse/{{show.id}}"><img class="img-rounded" ng-src="{{model.getShowArtButtons(show)}}" alt="N/A"></a>
+            <div class="caption text-center">
+                <h3>{{show.name}}</h3>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-primary btn-block" href="/#/shows/browse/topRated">Browse More Top Rated Shows</a>
 
 </div>
 

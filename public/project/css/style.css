@@ -12,6 +12,10 @@
     margin-bottom: 10px;
 }
 
+.table-striped {
+    width: 100%;
+}
+
 body {
     padding-top: 60px;
     padding-bottom: 60px;
@@ -39,6 +43,10 @@ body {
 
 .follow-icon {
     padding-left: 20px;
+}
+
+.row-query {
+    margin-left: 25%;
 }
 
 .input-group {
@@ -81,6 +89,7 @@ body {
 /*user homepage styling*/
 .row{
     width: 100%;
+    margin-top: 20px;
 }
 .col-md-6 {
     width: 50%;

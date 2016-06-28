@@ -15,6 +15,7 @@
         vm.searchShows = searchShows;
         vm.searchShows = searchShows;
         vm.searchUsers = searchUsers;
+        vm.getShowArtButtons = getShowArtButtons;
 
         function init() {
             vm.user = $rootScope.currentUser;
@@ -22,7 +23,11 @@
             vm.dayOffset = 0;
             vm.day = findDayByOffset(vm.dayOffset);
             vm.showListByNextEpisode = [];
+            vm.userFollows = [];
             getNextEpisodesForUser();
+            getFollowsUsers();
+            setTopRated();
+            setPopular();
         }
         init();
 
@@ -141,11 +146,32 @@
 
             return false;
         }
+        
+        function getFollowsUsers() {
+            for(var i in vm.user.follows) {
+                UserService
+                    .findUserById(vm.user.follows[i])
+                    .then(function(res) {
+                        var user = res.data;
+                        vm.userFollows.push(user);
+                    });
+            }
+        }
 
         function getShowArt(show) {
             if(show.backdropFilePath) {
                 var baseUrl = "http://image.tmdb.org/t/p/original/";
                 return $sce.trustAsResourceUrl(baseUrl + show.backdropFilePath);
+            }
+            else {
+                return $sce.trustAsResourceUrl('/project/resources/no_image_available.png');
+            }
+        }
+
+        function getShowArtButtons(show) {
+            if(show.backdrop_path) {
+                var baseUrl = "http://image.tmdb.org/t/p/original/";
+                return $sce.trustAsResourceUrl(baseUrl + show.backdrop_path);
             }
             else {
                 return $sce.trustAsResourceUrl('/project/resources/no_image_available.png');
@@ -194,6 +220,32 @@
                 }
             }
             return result;
+        }
+
+        function setPopular() {
+            TmdbService
+                .popular()
+                .then(function(res) {
+                    var results = [];
+                    var popular = JSON.parse(res.data).results;
+                    for(var i=0; i<3; i++) {
+                        results.push(popular[i]);
+                    }
+                    vm.popularShows = results;
+                });
+        }
+
+        function setTopRated() {
+            TmdbService
+                .topRated()
+                .then(function(res) {
+                    var results = [];
+                    var popular = JSON.parse(res.data).results;
+                    for(var i=0; i<3; i++) {
+                        results.push(popular[i]);
+                    }
+                    vm.topRatedShows = results;
+                });
         }
     }
 

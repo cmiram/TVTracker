@@ -3,9 +3,48 @@
 </div>
 
 <div class="container">
-    
+
+    <p>Common Shows: </p>
+    <div ng-if="model.commonShows.length == 0" class="alert alert-danger text-center">
+        You have no shows in common
+    </div>
+    <div class="row">
+        <div class="col-md-4" ng-repeat="show in model.commonShows">
+            <a href="/#/shows/browse/{{show.id}}"><img class="img-rounded" ng-src="{{model.getShowArt(show)}}" alt="N/A"></a>
+            <div class="caption text-center">
+                <h4>{{show.name}}</h4>
+            </div>
+        </div>
+    </div>
+
+    <p ng-if="!(model.commonShows.length == 0)">Similar to your common shows:</p>
+    <div class="row">
+        <div class="col-md-4" ng-repeat="show in model.similarShows">
+            <a href="/#/shows/browse/{{show.id}}"><img class="img-rounded" ng-src="{{model.getShowArt(show)}}"/></a>
+            <div class="caption text-center">
+                <h4>{{show.name}}</h4>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div>
-    <ng-include src="'project/views/DRYhtml/footer.view.client.html'"></ng-include>
-</div>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-footer">
+            <p class="navbar-text pull-left">
+                <a href="#/user/home/{{model.user._id}}" class="navbar-link">
+                    <span class="glyphicon glyphicon-home"></span>
+                </a>
+                <a ng-show="model.user" ng-click="model.toggleFollow()" class="navbar-link follow-icon">
+                    <span ng-if="model.isFollowing" class="glyphicon glyphicon-heart" style="color:red"></span>
+                    <span ng-if="!model.isFollowing" class="glyphicon glyphicon-heart"></span>
+                </a>
+            </p>
+            <p ng-show="{{model.user}}"  class="navbar-text pull-right">
+                <a href="#/user/home/{{model.user._id}}/edit" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

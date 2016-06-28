@@ -13,6 +13,7 @@
         vm.getFollowerUsername = getFollowerUsername;
         vm.navigateToShowPage = navigateToShowPage;
         vm.searchShows = searchShows;
+        vm.searchShows = searchShows;
 
         function init() {
             vm.user = $rootScope.currentUser;
@@ -47,6 +48,17 @@
 
         function daySelectedEvent(day) {
             vm.day = day;
+            setNothingToday(day);
+        }
+
+        function setNothingToday(day) {
+            for(var i in vm.showListByNextEpisode) {
+                if(vm.showListByNextEpisode[i].episode.release_date == day) {
+                    vm.nothingToday = false;
+                    return;
+                }
+            }
+            vm.nothingToday = true;
         }
 
         function searchShows(searchText) {
@@ -98,6 +110,7 @@
                                     images = JSON.parse(images);
                                     show.backdropFilePath = images.backdrops[0].file_path;
                                     vm.showListByNextEpisode.push(show);
+                                    setNothingToday(vm.day);
                                 });
                         }
                     });

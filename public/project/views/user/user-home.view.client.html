@@ -11,6 +11,10 @@
         </select>
     </div>
 
+    <div ng-show="model.nothingToday" class="alert alert-danger text-center">
+        None of your shows are airing!
+    </div>
+
     <div class="row">
         <div ng-repeat="show in model.showListByNextEpisode">
             <div class="col-sm-6 col-md-4 col-lg-3">

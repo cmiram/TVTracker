@@ -15,6 +15,7 @@
             if(vm.user) {
                 vm.isFollowing = checkIfFollowing();
             }
+            
             TmdbService
                 .showInfo(vm.tmdbId)
                 .then(function(res) {

@@ -14,9 +14,11 @@
         vm.navigateToShowPage = navigateToShowPage;
         vm.searchShows = searchShows;
         vm.searchShows = searchShows;
+        vm.searchUsers = searchUsers;
 
         function init() {
             vm.user = $rootScope.currentUser;
+            vm.userNotFound = false;
             vm.dayOffset = 0;
             vm.day = findDayByOffset(vm.dayOffset);
             vm.showListByNextEpisode = [];
@@ -167,6 +169,20 @@
             $location.url('/shows/search/' + query);
         }
 
+        function searchUsers(username) {
+            UserService
+                .findUserByUsername(username)
+                .then(function(res) {
+                    if(res.data) {
+                        var uid = res.data._id;
+                        $location.url('/user/other/' + uid);
+                    }
+                    else {
+                        vm.userNotFound = true;
+                    }
+                });
+        }
+        
         function replaceSpaces(str) {
             var result = '';
             for(var i in str) {

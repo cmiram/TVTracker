@@ -20,7 +20,7 @@
             <div class="col-sm-6 col-md-4 col-lg-3">
                 <div ng-show="show.episode.release_date == model.day" class="thumbnail">
                     <img ng-src="{{model.getShowArt(show)}}"
-                        ng-click="model.navigateToShowPage(show)">
+                         ng-click="model.navigateToShowPage(show)">
                     <div class="caption">
                         <h3>{{show.episode.show.title}}</h3>
                         <p>Season {{show.episode.season}} Episode {{show.episode.number}}
@@ -38,6 +38,24 @@
             {{model.getFollowerUsername(user)}}
         </div>
     </div>
+
+    <div class="row">
+        <div class="input-group pull-right" style="width: 80%">
+            <input ng-model="userSearch"
+                   type="text"
+                   class="form-control"
+                   placeholder="Search for Other Users">
+                <span class="input-group-btn">
+                    <a ng-click="model.searchUsers(userSearch)"
+                       class="btn btn-default"
+                       type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </a>
+                </span>
+        </div>
+    </div>
+
+    <div ng-show="model.userNotFound" class="alert alert-danger text-center" style="margin-top: 10px">Username not found</div>
 
     <a class="btn btn-primary btn-block" href="#/shows/browse/popular">Browse Popular Shows</a>
     <a class="btn btn-primary btn-block" href="#/shows/browse/topRated">Browse Top Rated Shows</a>

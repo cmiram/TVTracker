@@ -14,6 +14,7 @@
             logout: logout,
             findUserByUsernameAndPassword: findUserByUsernameAndPassword,
             findUserById: findUserById,
+            findUserByUsername: findUserByUsername,
             updateUser: updateUser,
             deleteUser: deleteUser,
             pushShow: pushShow,
@@ -78,6 +79,11 @@
         function pullShow(userId, name, tmdbId, objId) {
             var url = "/api/" + userId + "/unfollowShow/" + name + "/" + tmdbId + '/' + objId;
             return $http.delete(url);
+        }
+
+        function findUserByUsername(username) {
+            var url = "/api/user/username/" + username;
+            return $http.get(url);
         }
     }
 })();

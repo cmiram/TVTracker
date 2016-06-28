@@ -12,6 +12,7 @@ module.exports = function(app,models) {
     app.get("/api/user", getUsers);
     app.get("/api/user/:userId", findUserById);
     app.put("/api/user/:userId", updateUser);
+    app.get("/api/user/username/:username", findUserByUsername);
     app.delete("/api/user/:userId", deleteUser);
     app.put('/api/:userId/followShow/:name/:tmdbId', pushShow);
     app.delete('/api/:userId/unfollowShow/:name/:tmdbId/:objId', pullShow);
@@ -314,5 +315,17 @@ module.exports = function(app,models) {
                 function(error) {
                     res.status(400).send("Unable to unfollow user");
                 });
+    }
+
+    function findUserByUsername(req, res) {
+        var username = req.params.username;
+         userModel
+             .findUserByUsername(username)
+             .then(function(user) {
+                 res.json(user);
+             },
+             function(error) {
+                 res.status(404).send('could not find user');
+             });
     }
 };

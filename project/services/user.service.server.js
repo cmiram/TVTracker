@@ -110,15 +110,23 @@ module.exports = function(app,models) {
     }
 
     function register(req, res) {
-        var newUser = req.body;
+        var user = req.body;
+        user.password = bcrypt.hashSync(user.password);
+
         userModel
-            .createUser(newUser)
+            .createUser(user)
             .then(function(user) {
-                    res.json(user);
-                },
-                function(error) {
-                    res.status(400).send('unable to create user');
-                });
+                if(user) {
+                    req.login(user, function(error) {
+                        if(error) {
+                            res.status(400).send(error);
+                        }
+                        else {
+                            res.json(user);
+                        }
+                    });
+                }
+            });
     }
 
     function login(req, res) {

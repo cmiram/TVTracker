@@ -11,6 +11,7 @@
         vm.getShowArt = getShowArt;
         vm.navigateToShowPage = navigateToShowPage;
         vm.searchShows = searchShows;
+        vm.goBack = goBack;
 
         function init() {
             TmdbService
@@ -53,6 +54,10 @@
                 }
             }
             return result;
+        }
+
+        function goBack() {
+            window.history.back();
         }
     }
 

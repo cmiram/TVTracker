@@ -12,6 +12,7 @@
         vm.navigateToShowPage = navigateToShowPage;
         vm.results = [];
         vm.searchShows = searchShows;
+        vm.goBack = goBack;
 
         function init() {
             var query = $routeParams.query;
@@ -56,6 +57,10 @@
                 }
             }
             return result;
+        }
+
+        function goBack() {
+            window.history.back();
         }
     }
 

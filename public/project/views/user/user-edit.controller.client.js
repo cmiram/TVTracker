@@ -9,6 +9,7 @@
         vm.updateUser = updateUser;
         vm.searchShows = searchShows;
         vm.logout = logout;
+        vm.goBack = goBack;
         
         function init() {
             vm.user = $rootScope.currentUser;
@@ -50,7 +51,11 @@
                 .then(function(res) {
                     $rootScope.currentUser = null;
                     $location.url("/");
-                })
+                });
+        }
+
+        function goBack() {
+            window.history.back();
         }
     }
 

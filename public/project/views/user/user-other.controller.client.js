@@ -9,6 +9,7 @@
         vm.getShowArt = getShowArt;
         vm.toggleFollow = toggleFollow;
         vm.searchShows = searchShows;
+        vm.goBack = goBack;
 
         function init() {
             vm.userShows = [];
@@ -135,6 +136,10 @@
                 }
             }
             return result;
+        }
+
+        function goBack() {
+            window.history.back();
         }
     }
 })();

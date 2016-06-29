@@ -8,6 +8,7 @@
         vm.getShowArt = getShowArt;
         vm.toggleFollow = toggleFollow;
         vm.searchShows = searchShows;
+        vm.goBack = goBack;
 
         function init() {
             vm.user = $rootScope.currentUser;
@@ -119,6 +120,10 @@
                 }
             }
             return result;
+        }
+
+        function goBack() {
+            window.history.back();
         }
     }
 })();

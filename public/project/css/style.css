@@ -55,6 +55,15 @@ body {
     margin-right: 10px;
 }
 
+.glyphicon-chevron-left {
+    margin-left: 10px;
+    font-size: 1.5em;
+}
+
+.glyphicon-ok {
+    font-size: 1.25em;
+}
+
 .multi-item-carousel .carousel-inner > .item {
     -webkit-transition: 500ms ease-in-out left;
     transition: 500ms ease-in-out left;

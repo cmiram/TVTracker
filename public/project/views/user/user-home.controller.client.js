@@ -16,6 +16,7 @@
         vm.searchShows = searchShows;
         vm.searchUsers = searchUsers;
         vm.getShowArtButtons = getShowArtButtons;
+        vm.goBack = goBack;
 
         function init() {
             vm.user = $rootScope.currentUser;
@@ -246,6 +247,10 @@
                     }
                     vm.topRatedShows = results;
                 });
+        }
+
+        function goBack() {
+            window.history.back();
         }
     }
 

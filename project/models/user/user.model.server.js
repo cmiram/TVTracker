@@ -39,7 +39,16 @@ module.exports = function() {
     function updateUser(userId, newUser) {
         return User.update(
             {_id: userId},
-            {$set: newUser}
+            {$set:
+                {
+                    username: newUser.username,
+                    firstName: newUser.firstName,
+                    lastName: newUser.lastName,
+                    email: newUser.email,
+                    shows: newUser.shows,
+                    follows: newUser.follows
+                }
+            }
         );
     }
 

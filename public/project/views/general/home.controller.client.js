@@ -9,6 +9,9 @@
         vm.getShowArt = getShowArt;
 
         function init() {
+            vm.popularShows = [];
+            vm.topRatedShows = [];
+
             setPopular();
             setTopRated();
 
@@ -27,8 +30,11 @@
                 .then(function(res) {
                     var results = [];
                     var popular = JSON.parse(res.data).results;
+                    var randIndex;
                     for(var i=0; i<3; i++) {
-                        results.push(popular[i]);
+                        randIndex = Math.floor(Math.random() * popular.length);
+                        results.push(popular[randIndex]);
+                        popular.splice(randIndex,1);
                     }
                     vm.popularShows = results;
                 });
@@ -39,9 +45,12 @@
                 .topRated()
                 .then(function(res) {
                     var results = [];
-                    var popular = JSON.parse(res.data).results;
+                    var topRated = JSON.parse(res.data).results;
+                    var randIndex;
                     for(var i=0; i<3; i++) {
-                        results.push(popular[i]);
+                        randIndex = Math.floor(Math.random() * topRated.length);
+                        results.push(topRated[i]);
+                        topRated.splice(randIndex,1);
                     }
                     vm.topRatedShows = results;
                 });

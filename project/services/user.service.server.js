@@ -32,15 +32,9 @@ module.exports = function(app,models) {
         callbackURL  : process.env.FACEBOOK_CALLBACK_URL,
         enableProof: true
     };
-
-    var googleConfig = {
-        clientID     : process.env.GOOGLE_CLIENT_ID,
-        clientSecret : process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL  : process.env.GOOGLE_CALLBACK_URL,
-        enableProof: true
-    };
+    
     passport.use('tvt', new LocalStrategy(localStrategy));
-    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+    passport.use('facebook', new FacebookStrategy(facebookConfig, facebookStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
@@ -115,43 +109,6 @@ module.exports = function(app,models) {
             );
     }
 
-    function googleStrategy(token, refreshToken, profile, done) {
-        userModel
-            .findUserByGoogleId(profile.id)
-            .then(
-                function(user) {
-                    if(user) {
-                        return done(null, user);
-                    } else {
-                        var email = profile.emails[0].value;
-                        var emailParts = email.split("@");
-                        var newGoogleUser = {
-                            username:  emailParts[0],
-                            firstName: profile.name.givenName,
-                            lastName:  profile.name.familyName,
-                            email:     email,
-                            google: {
-                                id:    profile.id,
-                                token: token
-                            }
-                        };
-                        return userModel.createUser(newGoogleUser);
-                    }
-                },
-                function(err) {
-                    if (err) { return done(err); }
-                }
-            )
-            .then(
-                function(user){
-                    return done(null, user);
-                },
-                function(err){
-                    if (err) { return done(err); }
-                }
-            );
-    }
-
     function register(req, res) {
         var newUser = req.body;
         userModel
@@ -177,7 +134,6 @@ module.exports = function(app,models) {
     function loggedin(req, res) {
         res.send(req.isAuthenticated() ? req.user : '0');
     }
-
 
     function deleteUser(req, res) {
         var id = req.params.userId;

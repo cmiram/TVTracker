@@ -25,7 +25,7 @@
                 })
                 .then(function() {
                     EpguidesService
-                        .nextEpisode(removeSpaces(vm.show.name))
+                        .nextEpisode(formatForEpguides(vm.show.name))
                         .then(function(res) {
                             vm.nextEpisode = JSON.parse(res.data);
                         },
@@ -33,7 +33,7 @@
                             vm.nextEpisode = null;
                         });
                     EpguidesService
-                        .lastEpisode(removeSpaces(vm.show.name))
+                        .lastEpisode(formatForEpguides(vm.show.name))
                         .then(function(res) {
                             vm.lastEpisode = JSON.parse(res.data);
                         },
@@ -84,6 +84,17 @@
             for(var i in shows) {
                 if(shows[i].tmdbId !== tmdbId) {
                     result.push(shows[i]);
+                }
+            }
+            return result;
+        }
+
+        function formatForEpguides(str) {
+            var result = '';
+            str = removeSpaces(str);
+            for(var i in str) {
+                if(str[i] !== '.') {
+                    result += str[i];
                 }
             }
             return result;

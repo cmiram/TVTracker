@@ -12,8 +12,6 @@
         vm.daySelectedEvent = daySelectedEvent;
         vm.getFollowerUsername = getFollowerUsername;
         vm.navigateToShowPage = navigateToShowPage;
-        vm.searchShows = searchShows;
-        vm.searchShows = searchShows;
         vm.searchUsers = searchUsers;
         vm.getShowArtButtons = getShowArtButtons;
         vm.goBack = goBack;
@@ -69,13 +67,6 @@
             vm.nothingToday = true;
         }
 
-        function searchShows(searchText) {
-            if(searchText) {
-                searchText = searchText.split(' ').join('');
-                $location.url('/shows/search/' + searchText);
-            }
-        }
-
         function findDayByOffset(offsetFromToday) {
             var date = new Date();
             date.setDate(date.getDate() + offsetFromToday);
@@ -88,13 +79,16 @@
             }
 
             var day = date.getDate();
+            if(day < 10) {
+                day = '0' + day;
+            }
 
             return year + '-' + month + '-' + day;
         }
 
         function getNextEpisodesForUser() {
             for(var i in vm.user.shows) {
-                var name = vm.user.shows[i].name;
+                var name = formatForEpguides(vm.user.shows[i].name);
                 EpguidesService
                     .nextEpisode(name)
                     .then(function(res) {
@@ -103,13 +97,11 @@
                             return null;
                         }
                         else{
-                            //console.log(show);
                             show.tmdbId = getTmdbIdFromUserArray(show.episode.show.epguide_name);
                             return show;
                         }
                     })
                     .then(function(show) {
-                        //console.log(show);
                         if(show) {
                             TmdbService
                                 .showImages(show.tmdbId)
@@ -125,9 +117,25 @@
             }
         }
 
+        function formatForEpguides(str) {
+            var result = '';
+            str = removeSpaces(str);
+            for(var i in str) {
+                if(str[i] !== '.') {
+                    result += str[i];
+                }
+            }
+            return result;
+        }
+
+        function removeSpaces(str) {
+            str = str.replace(/\s/g, '');
+            return str;
+        }
+
         function getTmdbIdFromUserArray(name) {
             for(var i in vm.user.shows) {
-                if(name.toUpperCase() === vm.user.shows[i].name.toUpperCase() || isSubstring(name, vm.user.shows[i].name)) {
+                if(name.toUpperCase() === formatForEpguides(vm.user.shows[i].name.toUpperCase()) || isSubstring(name, vm.user.shows[i].name)) {
                     return vm.user.shows[i].tmdbId;
                 }
             }

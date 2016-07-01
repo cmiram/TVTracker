@@ -47,6 +47,14 @@
                     loggedin: checkLoggedin
                 }
             })
+            .when("user/shows/:uid", {
+                templateUrl: "project/views/user/user-shows.view.client.html",
+                controller: "UserShowsController",
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
+            })
             .when("/shows/browse/popular", {
                 templateUrl: "project/views/TVshows/browse-shows.view.client.html",
                 controller: "BrowseShowsController",

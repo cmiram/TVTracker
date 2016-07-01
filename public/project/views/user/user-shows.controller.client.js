@@ -10,25 +10,27 @@
         vm.getShowArt = getShowArt;
         vm.navigateToShowPage = navigateToShowPage;
         vm.searchShows = searchShows;
-        vm.getShowArtButtons = getShowArtButtons;
         vm.goBack = goBack;
 
         function init() {
             vm.user = $rootScope.currentUser;
+            vm.shows = [];
+            getShowsInfo();
         }
         init();
 
-        function getShowArt(show) {
-            if(show.backdropFilePath) {
-                var baseUrl = "http://image.tmdb.org/t/p/original/";
-                return $sce.trustAsResourceUrl(baseUrl + show.backdropFilePath);
-            }
-            else {
-                return $sce.trustAsResourceUrl('/project/resources/no_image_available.png');
+        function getShowsInfo() {
+            for(var i in vm.user.shows) {
+                TmdbService
+                    .showInfo(vm.user.shows[i].tmdbId)
+                    .then(function(res) {
+                        var show = JSON.parse(res.data);
+                        vm.shows.push(show);
+                    });
             }
         }
 
-        function getShowArtButtons(show) {
+        function getShowArt(show) {
             if(show.backdrop_path) {
                 var baseUrl = "http://image.tmdb.org/t/p/original/";
                 return $sce.trustAsResourceUrl(baseUrl + show.backdrop_path);
@@ -37,9 +39,9 @@
                 return $sce.trustAsResourceUrl('/project/resources/no_image_available.png');
             }
         }
-
+        
         function navigateToShowPage(show) {
-            $location.url('/shows/browse/' + show.tmdbId);
+            $location.url('/shows/browse/' + show.id);
         }
 
         function searchShows(query) {

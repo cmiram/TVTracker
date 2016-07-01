@@ -47,7 +47,7 @@
                     loggedin: checkLoggedin
                 }
             })
-            .when("user/shows/:uid", {
+            .when("/user/shows/:uid", {
                 templateUrl: "project/views/user/user-shows.view.client.html",
                 controller: "UserShowsController",
                 controllerAs: "model",

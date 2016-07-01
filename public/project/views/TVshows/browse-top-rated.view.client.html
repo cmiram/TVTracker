@@ -6,7 +6,7 @@
 
     <div class="alert alert-success button-block text-center"><h4>Top Rated Shows</h4></div>
 
-    <div class="col-xs-6 col-md-4" ng-repeat="show in model.shows">
+    <div class="col-xs-12 col-md-4" ng-repeat="show in model.shows">
         <div class="thumbnail">
             <img ng-src="{{model.getShowArt(show)}}"
                  ng-click="model.navigateToShowPage(show)">

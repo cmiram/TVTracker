@@ -21,7 +21,6 @@
                 .showInfo(vm.tmdbId)
                 .then(function(res) {
                     vm.show = JSON.parse(res.data);
-                    console.log(vm.show);
                     vm.showRating = vm.show.vote_average * 10;
                     vm.showArtPath = getShowArt(vm.show);
                 })

@@ -56,7 +56,7 @@
                 }
             })
             .when("/shows/browse/popular", {
-                templateUrl: "project/views/TVshows/browse-shows.view.client.html",
+                templateUrl: "project/views/TVshows/browse-popular.view.client.html",
                 controller: "BrowseShowsController",
                 controllerAs: "model"
             })

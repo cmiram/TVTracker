@@ -43,6 +43,10 @@
                 else if(i === 1) {
                     niceName = 'Tomorrow';
                 }
+                else {
+                    var temp = name.split('-');
+                    var niceName = temp[1] + '-' + temp[2] + '-' + temp[0];
+                }
                 
                 var day = {
                     niceName: niceName,

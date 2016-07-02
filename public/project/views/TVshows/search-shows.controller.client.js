@@ -22,6 +22,9 @@
                 .then(
                     function (res) {
                         vm.results =  JSON.parse(res.data).results;
+                        if(vm.results.length === 0) {
+                            vm.error = 'Your search returned no results';
+                        }
                     }
                 );
         }

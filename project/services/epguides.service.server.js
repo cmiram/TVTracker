@@ -15,6 +15,9 @@ module.exports = function(app) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
             }
+            else if(response.statusCode == 404) {
+                res.json(error);
+            }
             else {
                 res.status(400).send('error with api call');
             }
@@ -26,6 +29,9 @@ module.exports = function(app) {
         request(baseUrl + '/show/' + show + '/', function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
+            }
+            else if(response.statusCode == 404) {
+                res.json(error);
             }
             else {
                 res.status(400).send('error with api call');
@@ -41,6 +47,9 @@ module.exports = function(app) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
             }
+            else if(response.statusCode == 404) {
+                res.json(error);
+            }
             else {
                 res.status(400).send('error with api call');
             }
@@ -53,6 +62,9 @@ module.exports = function(app) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
             }
+            else if(response.statusCode == 404) {
+                res.json(error);
+            }
             else {
                 res.status(400).send('error with api call');
             }
@@ -64,6 +76,9 @@ module.exports = function(app) {
         request(baseUrl + '/show/' + show + '/last/', function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
+            }
+            else if(response.statusCode == 404) {
+                res.json(error);
             }
             else {
                 res.status(400).send('error with api call');

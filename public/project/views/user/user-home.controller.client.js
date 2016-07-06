@@ -98,7 +98,7 @@
                     .nextEpisode(name)
                     .then(function(res) {
                         var show = JSON.parse(res.data);
-                        if(res) {
+                        if(!show) {
                             return null;
                         }
                         else{

@@ -3,7 +3,7 @@
         .module("TVTracker")
         .controller("UserShowsController", UserShowsController);
 
-    function UserShowsController($location, $routeParams, $rootScope, EpguidesService, TmdbService, $sce, UserService) {
+    function UserShowsController($location, $routeParams, $rootScope, EpguidesService, TmdbService, $sce) {
         var vm = this;
         vm.route = $routeParams;
         vm.searchShows = searchShows;
@@ -26,7 +26,41 @@
                     .then(function(res) {
                         var show = JSON.parse(res.data);
                         vm.shows.push(show);
+                        EpguidesService
+                            .nextEpisode(formatForEpguides(show.name))
+                            .then(function(res) {
+                                var show = JSON.parse(res.data);
+                                if(show) {
+                                    updateShowArray(show);
+                                }
+                            });
                     });
+            }
+        }
+
+        function formatForEpguides(str) {
+            var result = '';
+            str = removeSpaces(str);
+            for(var i in str) {
+                if(str[i] !== '.') {
+                    result += str[i];
+                }
+            }
+            return result;
+        }
+
+        function removeSpaces(str) {
+            str = str.replace(/\s/g, '');
+            return str;
+        }
+
+        function updateShowArray(show) {
+            var name = show.episode.show.epguide_name.toUpperCase();
+            for(var i in vm.shows) {
+                if(name == formatForEpguides(vm.shows[i].name).toUpperCase()) {
+                    vm.shows[i].next = show.episode.release_date;
+                    return;
+                }
             }
         }
 

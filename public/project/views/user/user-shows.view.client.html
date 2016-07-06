@@ -3,7 +3,7 @@
 </div>
 
 <div class="container">
-    <div class="col-xs-12 col-md-4" ng-repeat="show in model.shows">
+    <div class="col-xs-12 col-sm-6 col-md-4" ng-repeat="show in model.shows">
         <div class="thumbnail">
             <img ng-src="{{model.getShowArt(show)}}"
                  ng-click="model.navigateToShowPage(show)">
@@ -12,10 +12,13 @@
                 <div ng-show="show.status !== 'Ended'"
                      class="alert alert-success button-block text-center status-alert">
                     <h5>Still Running</h5>
+                    <h5 ng-show="!show.next">Next Episode: N/A</h5>
+                    <h5 ng-show="show.next">Next Episode: {{show.next}}</h5>
                 </div>
                 <div ng-show="show.status == 'Ended'"
                      class="alert alert-danger button-block text-center status-alert">
                     <h5>Series Ended</h5>
+                    <h5>No more episodes...</h5>
                 </div>
             </div>
         </div>

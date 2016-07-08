@@ -5,5 +5,6 @@ module.exports = function(app) {
     var userService = require('./services/user.service.server')(app, models);
     var epguidesService = require('./services/epguides.service.server')(app);
     var tmdbService = require('./services/tmdb.service.server')(app);
+    var omdbService = require('./services/omdb.service.server')(app);
 };
 

@@ -3,7 +3,7 @@
         .module("TVTracker")
         .controller("SpecificShowController", SpecificShowController);
 
-    function SpecificShowController($location, $routeParams, $rootScope, EpguidesService, TmdbService, $sce, UserService) {
+    function SpecificShowController($location, $routeParams, $rootScope, EpguidesService, TmdbService, $sce, UserService, OmdbService) {
         var vm = this;
         vm.getShowArt = getShowArt;
         vm.toggleFollow = toggleFollow;
@@ -21,7 +21,6 @@
                 .showInfo(vm.tmdbId)
                 .then(function(res) {
                     vm.show = JSON.parse(res.data);
-                    vm.showRating = vm.show.vote_average * 10;
                     vm.showArtPath = getShowArt(vm.show);
                 })
                 .then(function() {
@@ -42,6 +41,17 @@
                             vm.lastEpisode = null;
                         });
 
+                });
+            TmdbService
+                .externalIds(vm.tmdbId)
+                .then(function(res) {
+                    var imdbId = JSON.parse(res.data).imdb_id;
+                    OmdbService
+                        .showData(imdbId)
+                        .then(function(res) {
+                            vm.show.vote_average = JSON.parse(res.data).imdbRating;
+                            vm.showRating = vm.show.vote_average * 10;
+                        });
                 });
         }
         init();

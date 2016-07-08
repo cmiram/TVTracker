@@ -50,7 +50,6 @@
                         .showData(imdbId)
                         .then(function(res) {
                             var showData = JSON.parse(res.data);
-                            console.log(showData);
                             vm.show.vote_average = showData.imdbRating;
                             vm.showRating = vm.show.vote_average * 10;
                             vm.content_rating = showData.Rated;

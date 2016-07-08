@@ -277,13 +277,18 @@
                 .then(function(res) {
                     var results = [];
                     var similar = JSON.parse(res.data).results;
-                    var randIndex;
-                    for(var i=0; i<3; i++) {
-                        randIndex = Math.floor(Math.random() * similar.length);
-                        results.push(similar[randIndex]);
-                        similar.splice(randIndex,1);
+                    if(similar.length > 2) {
+                        var randIndex;
+                        for(var i=0; i<3; i++) {
+                            randIndex = Math.floor(Math.random() * similar.length);
+                            results.push(similar[randIndex]);
+                            similar.splice(randIndex,1);
+                        }
+                        vm.similarShows = results;
                     }
-                    vm.similarShows = results;
+                    else {
+                        setSimilar();
+                    }
                 });
         }
 

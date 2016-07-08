@@ -7,6 +7,7 @@
         var vm = this;
         vm.login = login;
         vm.getShowArt = getShowArt;
+        vm.onEnter = onEnter;
 
         function init() {
             vm.popularShows = [];
@@ -81,6 +82,12 @@
             }
             else {
                 return $sce.trustAsResourceUrl('/project/resources/no_image_available.png');
+            }
+        }
+
+        function onEnter(event, username, password) {
+            if(event === 13) {
+                login(username, password);
             }
         }
     }

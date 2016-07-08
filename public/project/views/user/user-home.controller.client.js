@@ -28,6 +28,7 @@
             getFollowsUsers();
             setTopRated();
             setPopular();
+            setSimilar();
         }
         init();
 
@@ -36,7 +37,7 @@
             for(var i=0; i<7; i++) {
                 var name = findDayByOffset(i);
                 var niceName = name;
-                
+
                 if(i === 0) {
                     niceName = 'Today';
                 }
@@ -45,7 +46,7 @@
                 }
                 else {
                     var temp = name.split('-');
-                    var niceName = temp[1] + '-' + temp[2] + '-' + temp[0];
+                    niceName = temp[1] + '-' + temp[2] + '-' + temp[0];
                 }
                 
                 var day = {
@@ -265,6 +266,24 @@
                         popular.splice(randIndex,1);
                     }
                     vm.topRatedShows = results;
+                });
+        }
+
+        function setSimilar() {
+            var index = Math.floor(Math.random() * vm.user.shows.length);
+            var show = vm.user.shows[index];
+            TmdbService
+                .similarShows(show.tmdbId)
+                .then(function(res) {
+                    var results = [];
+                    var similar = JSON.parse(res.data).results;
+                    var randIndex;
+                    for(var i=0; i<3; i++) {
+                        randIndex = Math.floor(Math.random() * similar.length);
+                        results.push(similar[randIndex]);
+                        similar.splice(randIndex,1);
+                    }
+                    vm.similarShows = results;
                 });
         }
 

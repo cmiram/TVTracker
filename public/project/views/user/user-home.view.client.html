@@ -71,6 +71,16 @@
     <div ng-show="model.userNotFound" class="alert alert-danger text-center" style="margin-top: 10px">Username not found</div>
 
     <div class="row">
+        <div class="col-md-4" ng-repeat="show in model.similarShows">
+            <a href="/#/shows/browse/{{show.id}}"><img class="img-rounded" ng-src="{{model.getShowArtButtons(show)}}"/></a>
+            <div class="caption text-center">
+                <h3>{{show.name}}</h3>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-primary btn-block">Similar to Shows You Follow</a>
+
+    <div class="row">
         <div class="col-md-4" ng-repeat="show in model.popularShows">
             <a href="/#/shows/browse/{{show.id}}"><img class="img-rounded" ng-src="{{model.getShowArtButtons(show)}}" alt="N/A"></a>
             <div class="caption text-center">

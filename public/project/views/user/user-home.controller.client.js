@@ -15,6 +15,7 @@
         vm.searchUsers = searchUsers;
         vm.getShowArtButtons = getShowArtButtons;
         vm.goBack = goBack;
+        vm.onEnter = onEnter;
 
         function init() {
             vm.user = $rootScope.currentUser;
@@ -290,6 +291,12 @@
                         setSimilar();
                     }
                 });
+        }
+
+        function onEnter(event, query) {
+            if(event === 13) {
+                searchShows(query);
+            }
         }
 
         function goBack() {

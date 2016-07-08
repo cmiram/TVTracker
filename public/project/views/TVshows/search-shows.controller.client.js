@@ -13,6 +13,7 @@
         vm.results = [];
         vm.searchShows = searchShows;
         vm.goBack = goBack;
+        vm.onEnter = onEnter;
 
         function init() {
             var query = $routeParams.query;
@@ -60,6 +61,12 @@
                 }
             }
             return result;
+        }
+
+        function onEnter(event, query) {
+            if(event === 13) {
+                searchShows(query);
+            }
         }
 
         function goBack() {

@@ -13,7 +13,8 @@
                 <input ng-model="searchText"
                        type="text"
                        class="form-control"
-                       placeholder="Search for Shows">
+                       placeholder="Search for Shows"
+                       ng-keypress="model.onEnter($event.keyCode, searchText)">
                 <span class="input-group-btn">
                     <a ng-click="model.searchShows(searchText)"
                        class="btn btn-default"

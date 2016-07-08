@@ -9,6 +9,7 @@
         vm.toggleFollow = toggleFollow;
         vm.searchShows = searchShows;
         vm.goBack = goBack;
+        vm.onEnter = onEnter;
 
         function init() {
             vm.user = $rootScope.currentUser;
@@ -145,6 +146,12 @@
                 }
             }
             return result;
+        }
+
+        function onEnter(event, query) {
+            if(event === 13) {
+                searchShows(query);
+            }
         }
 
         function goBack() {

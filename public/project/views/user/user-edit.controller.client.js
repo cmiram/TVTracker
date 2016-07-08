@@ -53,7 +53,7 @@
                     $location.url("/");
                 });
         }
-
+        
         function goBack() {
             window.history.back();
         }

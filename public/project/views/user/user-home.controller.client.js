@@ -110,11 +110,10 @@
                     .then(function(show) {
                         if(show) {
                             TmdbService
-                                .showImages(show.tmdbId)
+                                .showInfo(show.tmdbId)
                                 .then(function(res) {
-                                    var images = res.data;
-                                    images = JSON.parse(images);
-                                    show.backdropFilePath = images.backdrops[0].file_path;
+                                    var data = JSON.parse(res.data);
+                                    show.backdropFilePath = data.backdrop_path;
                                     vm.showListByNextEpisode.push(show);
                                     setNothingToday(vm.day);
                                 });

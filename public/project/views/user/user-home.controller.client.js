@@ -127,7 +127,8 @@
             var result = '';
             str = removeSpaces(str);
             for(var i in str) {
-                if(str[i] !== '.') {
+                var charCode = str.charCodeAt(i);
+                if((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123)) {
                     result += str[i];
                 }
             }

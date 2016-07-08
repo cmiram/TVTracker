@@ -57,7 +57,8 @@
             <input ng-model="userSearch"
                    type="text"
                    class="form-control"
-                   placeholder="Search Usernames">
+                   placeholder="Search Usernames"
+                   ng-keypress="model.onSearchUser($event.keyCode, userSearch)">
                 <span class="input-group-btn">
                     <a ng-click="model.searchUsers(userSearch)"
                        class="btn btn-default"

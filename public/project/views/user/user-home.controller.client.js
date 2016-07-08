@@ -16,6 +16,7 @@
         vm.getShowArtButtons = getShowArtButtons;
         vm.goBack = goBack;
         vm.onEnter = onEnter;
+        vm.onSearchUser = onSearchUser;
 
         function init() {
             vm.user = $rootScope.currentUser;
@@ -296,6 +297,12 @@
         function onEnter(event, query) {
             if(event === 13) {
                 searchShows(query);
+            }
+        }
+
+        function onSearchUser(event, query) {
+            if(event === 13) {
+                searchUsers(query);
             }
         }
 

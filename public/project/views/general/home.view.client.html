@@ -22,7 +22,7 @@
                            type="password"
                            placeholder="Password"
                            class="form-control"
-                           ng-keypress="model.onEnter($event.keyCode, username, password)">
+                           ng-keypress="model.onLogin($event.keyCode, username, password)">
                 </div>
                 <a ng-click="model.login(username, password)" class="btn btn-primary">Login</a>
                 <a href="/auth/facebook" class="btn btn-primary btn-primary">
@@ -31,15 +31,29 @@
                 </a>
                 <a href="#/register" class="btn btn-primary">Register</a>
             </form>
-        </div><!--/.navbar-collapse -->
+        </div>
     </div>
 </nav>
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2 class="text-center">Welcome</h2>
-            <p class="text-center">Follow your favorite shows and check which ones have a new episode today!</p>
+            <h2 class="text-center">Welcome to TVTracker!</h2>
+            <p class="text-center">Follow your favorite shows and easily check which ones have a new episode today or in the upcoming week!</p>
+            <div class="input-group" style="margin-left: 12.5%; width: 75%">
+                <input ng-model="searchText"
+                       type="text"
+                       class="form-control"
+                       placeholder="Search for Shows"
+                       ng-keypress="model.onEnter($event.keyCode, searchText)">
+                <span class="input-group-btn">
+                    <a ng-click="model.searchShows(searchText)"
+                       class="btn btn-default"
+                       type="button">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </a>
+                </span>
+            </div>
         </div>
     </div>
 

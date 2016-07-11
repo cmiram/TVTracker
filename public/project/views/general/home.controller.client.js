@@ -7,6 +7,7 @@
         var vm = this;
         vm.login = login;
         vm.getShowArt = getShowArt;
+        vm.onLogin = onLogin;
         vm.onEnter = onEnter;
 
         function init() {
@@ -85,10 +86,34 @@
             }
         }
 
-        function onEnter(event, username, password) {
+        function onLogin(event, username, password) {
             if(event === 13) {
                 login(username, password);
             }
+        }
+
+        function onEnter(event, query) {
+            if(event === 13) {
+                searchShows(query);
+            }
+        }
+
+        function searchShows(query) {
+            query = replaceSpaces(query);
+            $location.url('/shows/search/' + query);
+        }
+
+        function replaceSpaces(str) {
+            var result = '';
+            for(var i in str) {
+                if(str[i] == ' ') {
+                    result = result + '%20';
+                }
+                else {
+                    result = result + str[i];
+                }
+            }
+            return result;
         }
     }
 })();

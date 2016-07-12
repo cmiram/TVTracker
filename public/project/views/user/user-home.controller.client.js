@@ -110,7 +110,8 @@
                         }
                     })
                     .then(function(show) {
-                        if(show) {
+                        if(show && nextInNextSevenDays(show.episode.release_date)) {
+                            console.log(show);
                             TmdbService
                                 .showInfo(show.tmdbId)
                                 .then(function(res) {
@@ -122,6 +123,15 @@
                         }
                     });
             }
+        }
+
+        function nextInNextSevenDays(day) {
+            for(var i in vm.daysToCheck) {
+                if(vm.daysToCheck[i].name === day) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         function formatForEpguides(str) {

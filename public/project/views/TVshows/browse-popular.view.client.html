@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <a ng-click="model.loadMore()" class="btn btn-primary btn-block">Load More</a>
+    <a ng-if="(model.tmdbPage <= model.maxPages)" ng-click="model.loadMore()" class="btn btn-primary btn-block">Load More</a>
 
 </div>
 

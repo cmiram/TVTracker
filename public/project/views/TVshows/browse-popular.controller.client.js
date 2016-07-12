@@ -21,7 +21,9 @@
                 .popular(vm.tmdbPage++)
                 .then(
                     function (res) {
-                        vm.shows =  JSON.parse(res.data).results;
+                        var data = JSON.parse(res.data);
+                        vm.maxPages = data.total_pages;
+                        vm.shows =  data.results;
                     }
                 );
         }

@@ -111,7 +111,6 @@
                     })
                     .then(function(show) {
                         if(show && nextInNextSevenDays(show.episode.release_date)) {
-                            console.log(show);
                             TmdbService
                                 .showInfo(show.tmdbId)
                                 .then(function(res) {

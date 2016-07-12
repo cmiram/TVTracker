@@ -6,8 +6,8 @@ module.exports = function(app) {
     var endUrl = "?api_key=" + apiKey;
 
 
-    app.get('/api/tmdb/topRated', topRated);
-    app.get('/api/tmdb/popular', popular);
+    app.get('/api/tmdb/topRated/:page', topRated);
+    app.get('/api/tmdb/popular/:page', popular);
     app.get('/api/tmdb/search/:query', searchShows);
     app.get('/api/tmdb/:id/contentRating', contentRating);
     app.get('/api/tmdb/:id/credits', credits);
@@ -17,7 +17,7 @@ module.exports = function(app) {
     app.get('/api/tmdb/:id/videos', videos);
     app.get('/api/tmdb/:id', showInfo);
     app.get('/api/tmdb/onTheAir', nextSevenDays);
-    app.get('/api/tmdb/airingToday', airingToday);
+    app.get('/api/tmdb/airingToday/:page', airingToday);
 
     function searchShows(req, res) {
         var query = req.params.query;
@@ -139,7 +139,8 @@ module.exports = function(app) {
     }
 
     function airingToday(req, res) {
-        var url = baseUrl + 'airing_today' + endUrl;
+        var page = req.params.page;
+        var url = baseUrl + 'airing_today' + endUrl + '&page=' + page;
         request(url, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
@@ -151,7 +152,8 @@ module.exports = function(app) {
     }
 
     function topRated(req, res) {
-        var url = baseUrl + 'top_rated' + endUrl;;
+        var page = req.params.page;
+        var url = baseUrl + 'top_rated' + endUrl + '&page=' + page;
         request(url, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
@@ -163,7 +165,8 @@ module.exports = function(app) {
     }
 
     function popular(req, res) {
-        var url = baseUrl + 'popular' + endUrl;
+        var page = req.params.page;
+        var url = baseUrl + 'popular' + endUrl  + '&page=' + page;
         request(url, function(error, response, body) {
             if(!error && response.statusCode == 200) {
                 res.json(body);

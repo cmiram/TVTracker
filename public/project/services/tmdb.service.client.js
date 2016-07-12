@@ -63,18 +63,18 @@
             return $http.get(url);
         }
 
-        function airingToday() {
-            var url = baseUrl + 'airingToday';
+        function airingToday(page) {
+            var url = baseUrl + 'airingToday/' + page;
             return $http.get(url);
         }
 
-        function topRated() {
-            var url = baseUrl + 'topRated';
+        function topRated(page) {
+            var url = baseUrl + 'topRated/' + page;
             return $http.get(url);
         }
 
-        function popular() {
-            var url = baseUrl + 'popular';
+        function popular(page) {
+            var url = baseUrl + 'popular/' + page;
             return $http.get(url);
         }
         

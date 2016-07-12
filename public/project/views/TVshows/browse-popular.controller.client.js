@@ -12,11 +12,13 @@
         vm.navigateToShowPage = navigateToShowPage;
         vm.searchShows = searchShows;
         vm.goBack = goBack;
-        vm.onEnter = onEnter
+        vm.onEnter = onEnter;
+        vm.loadMore = loadMore;
 
         function init() {
+            vm.tmdbPage = 1;
             TmdbService
-                .popular()
+                .popular(vm.tmdbPage++)
                 .then(
                     function (res) {
                         vm.shows =  JSON.parse(res.data).results;
@@ -61,6 +63,17 @@
             if(event === 13) {
                 searchShows(query);
             }
+        }
+        
+        function loadMore() {
+            TmdbService
+                .popular(vm.tmdbPage++)
+                .then(function(res) {
+                    var results = JSON.parse(res.data).results;
+                    for(var i in results) {
+                        vm.shows.push(results[i]);
+                    }
+                });
         }
         
         function goBack() {

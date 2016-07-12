@@ -11,6 +11,8 @@
         vm.onEnter = onEnter;
 
         function init() {
+            checkIfAlreadyLoggedIn();
+
             vm.popularShows = [];
             vm.topRatedShows = [];
 
@@ -25,6 +27,19 @@
                 })
         }
         init();
+
+        function checkIfAlreadyLoggedIn() {
+           UserService
+                .checkLoggedin()
+                .then(
+                    function (response) {
+                        var user = response.data;
+                        if (user !== '0') {
+                            $rootScope.currentUser = user;
+                            $location.url("/user/home/" + user._id);
+                        }
+                    });
+        }
 
         function setPopular() {
             TmdbService

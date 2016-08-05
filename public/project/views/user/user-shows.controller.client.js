@@ -21,17 +21,24 @@
         init();
 
         function getShowsInfo() {
+            var shows = window.sessionStorage.getItem('AllUserShows');
+            if(shows) {
+                shows = JSON.parse(shows);
+                vm.shows = shows;
+                return;
+            }
+
             for(var i in vm.user.shows) {
                 TmdbService
                     .showInfo(vm.user.shows[i].tmdbId)
-                    .then(function(res) {
+                    .then(function (res) {
                         var show = JSON.parse(res.data);
                         vm.shows.push(show);
                         EpguidesService
                             .nextEpisode(formatForEpguides(show.name))
-                            .then(function(res) {
+                            .then(function (res) {
                                 var show = JSON.parse(res.data);
-                                if(show) {
+                                if (show) {
                                     updateShowArray(show);
                                 }
                             });
@@ -61,6 +68,7 @@
             for(var i in vm.shows) {
                 if(name == formatForEpguides(vm.shows[i].name).toUpperCase()) {
                     vm.shows[i].next = show.episode.release_date;
+                    window.sessionStorage.setItem('AllUserShows', JSON.stringify(vm.shows));
                     return;
                 }
             }
@@ -75,7 +83,7 @@
                 return $sce.trustAsResourceUrl('/project/resources/no_image_available.png');
             }
         }
-        
+
         function navigateToShowPage(show) {
             $location.url('/shows/browse/' + show.id);
         }

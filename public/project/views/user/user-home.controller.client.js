@@ -96,31 +96,39 @@
 
         function getNextEpisodesForUser() {
             for(var i in vm.user.shows) {
-                var name = formatForEpguides(vm.user.shows[i].name);
-                EpguidesService
-                    .nextEpisode(name)
-                    .then(function(res) {
-                        var show = JSON.parse(res.data);
-                        if(!show) {
-                            return null;
-                        }
-                        else{
-                            show.tmdbId = getTmdbIdFromUserArray(show.episode.show.epguide_name);
-                            return show;
-                        }
-                    })
-                    .then(function(show) {
-                        if(show && nextInNextSevenDays(show.episode.release_date)) {
-                            TmdbService
-                                .showInfo(show.tmdbId)
-                                .then(function(res) {
-                                    var data = JSON.parse(res.data);
-                                    show.backdropFilePath = data.backdrop_path;
-                                    vm.showListByNextEpisode.push(show);
-                                    setNothingToday(vm.day);
-                                });
-                        }
-                    });
+                var storedShow = window.sessionStorage.getItem(vm.user.shows[i].tmdbId);
+                if(storedShow) {
+                    storedShow = JSON.parse(storedShow);
+                    vm.showListByNextEpisode.push(storedShow);
+                }
+                else {
+                    var name = formatForEpguides(vm.user.shows[i].name);
+                    EpguidesService
+                        .nextEpisode(name)
+                        .then(function (res) {
+                            var show = JSON.parse(res.data);
+                            if (!show) {
+                                return null;
+                            }
+                            else {
+                                show.tmdbId = getTmdbIdFromUserArray(show.episode.show.epguide_name);
+                                return show;
+                            }
+                        })
+                        .then(function (show) {
+                            if (show && nextInNextSevenDays(show.episode.release_date)) {
+                                TmdbService
+                                    .showInfo(show.tmdbId)
+                                    .then(function (res) {
+                                        var data = JSON.parse(res.data);
+                                        show.backdropFilePath = data.backdrop_path;
+                                        vm.showListByNextEpisode.push(show);
+                                        setNothingToday(vm.day);
+                                        window.sessionStorage.setItem(show.tmdbId, JSON.stringify(show));
+                                    });
+                            }
+                        });
+                }
             }
         }
 
@@ -249,11 +257,25 @@
         }
 
         function setPopular() {
+            var popular = window.sessionStorage.getItem('popular');
+            var results = [];
+            if(popular) {
+                popular = JSON.parse(popular);
+                var randIndex;
+                for(var i=0; i<3; i++) {
+                    randIndex = Math.floor(Math.random() * popular.length);
+                    results.push(popular[randIndex]);
+                    popular.splice(randIndex,1);
+                }
+                vm.popularShows = results;
+                return;
+            }
+
             TmdbService
                 .popular()
                 .then(function(res) {
-                    var results = [];
-                    var popular = JSON.parse(res.data).results;
+                    popular = JSON.parse(res.data).results;
+                    window.sessionStorage.setItem('popular', JSON.stringify(popular));
                     var randIndex;
                     for(var i=0; i<3; i++) {
                         randIndex = Math.floor(Math.random() * popular.length);
@@ -265,29 +287,59 @@
         }
 
         function setTopRated() {
+            var topRated = window.sessionStorage.getItem('topRated');
+            var results = [];
+            if(topRated) {
+                topRated = JSON.parse(topRated);
+                var randIndex;
+                for(var i=0; i<3; i++) {
+                    randIndex = Math.floor(Math.random() * topRated.length);
+                    results.push(topRated[randIndex]);
+                    topRated.splice(randIndex,1);
+                }
+                vm.topRatedShows = results;
+                return;
+
+            }
             TmdbService
                 .topRated()
                 .then(function(res) {
-                    var results = [];
-                    var popular = JSON.parse(res.data).results;
+                    topRated = JSON.parse(res.data).results;
+                    window.sessionStorage.setItem('topRated', JSON.stringify(topRated));
                     var randIndex;
                     for(var i=0; i<3; i++) {
-                        randIndex = Math.floor(Math.random() * popular.length);
-                        results.push(popular[randIndex]);
-                        popular.splice(randIndex,1);
+                        randIndex = Math.floor(Math.random() * topRated.length);
+                        results.push(topRated[randIndex]);
+                        topRated.splice(randIndex,1);
                     }
                     vm.topRatedShows = results;
                 });
         }
 
         function setSimilar() {
+            var similar = window.sessionStorage.getItem('similar');
+            var results = [];
+            if(similar) {
+                similar = JSON.parse(similar);
+                if(similar.length > 2) {
+                    var randIndex;
+                    for (var i = 0; i < 3; i++) {
+                        randIndex = Math.floor(Math.random() * similar.length);
+                        results.push(similar[randIndex]);
+                        similar.splice(randIndex, 1);
+                    }
+                    vm.similarShows = results;
+                    return;
+                }
+            }
+
             var index = Math.floor(Math.random() * vm.user.shows.length);
             var show = vm.user.shows[index];
             TmdbService
                 .similarShows(show.tmdbId)
                 .then(function(res) {
-                    var results = [];
-                    var similar = JSON.parse(res.data).results;
+                    similar = JSON.parse(res.data).results;
+                    window.sessionStorage.setItem('similar', JSON.stringify(similar));
                     if(similar.length > 2) {
                         var randIndex;
                         for(var i=0; i<3; i++) {

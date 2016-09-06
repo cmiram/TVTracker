@@ -12,6 +12,7 @@
 
         function init() {
             checkIfAlreadyLoggedIn();
+            document.getElementById('username').focus();
 
             vm.popularShows = [];
             vm.topRatedShows = [];
@@ -24,7 +25,7 @@
                 .then(function(res) {
                     vm.popShows = res.data.results;
                     vm.popShows.splice(0,5);
-                })
+                });
         }
         init();
 

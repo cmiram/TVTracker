@@ -26,6 +26,7 @@
             vm.showListByNextEpisode = [];
             vm.userFollows = [];
             vm.daySelected = vm.daysToCheck[0];
+            vm.showsOnSelectedDay = [];
             getNextEpisodesForUser();
             getFollowsUsers();
             setTopRated();
@@ -63,6 +64,7 @@
         function daySelectedEvent(day) {
             vm.day = day;
             setNothingToday(day);
+            updateSelectedDayArray();
         }
 
         function setNothingToday(day) {
@@ -107,8 +109,8 @@
                         .nextEpisode(name)
                         .then(function (res) {
                             var show = JSON.parse(res.data);
-                            if (!show) {
-                                return null;
+                            if (show.error) {
+                                return show;
                             }
                             else {
                                 show.tmdbId = getTmdbIdFromUserArray(show.episode.show.epguide_name);
@@ -116,7 +118,7 @@
                             }
                         })
                         .then(function (show) {
-                            if (show && nextInNextSevenDays(show.episode.release_date)) {
+                            if (!show.error && nextInNextSevenDays(show.episode.release_date)) {
                                 TmdbService
                                     .showInfo(show.tmdbId)
                                     .then(function (res) {
@@ -128,6 +130,15 @@
                                     });
                             }
                         });
+                }
+            }
+        }
+
+        function updateSelectedDayArray() {
+            vm.showsOnSelectedDay = [];
+            for(var i in vm.showListByNextEpisode) {
+                if(vm.showListByNextEpisode[i].episode.release_date === vm.day) {
+                    vm.showsOnSelectedDay.push(vm.showListByNextEpisode[i]);
                 }
             }
         }

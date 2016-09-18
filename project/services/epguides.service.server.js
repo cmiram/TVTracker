@@ -62,6 +62,9 @@ module.exports = function(app) {
             if(!error && response.statusCode == 200) {
                 res.json(body);
             }
+            else if(response.statusCode == 404) {
+                res.json(body);
+            }
             else {
                 res.json(error);
             }

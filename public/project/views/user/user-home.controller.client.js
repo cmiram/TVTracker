@@ -63,18 +63,13 @@
 
         function daySelectedEvent(day) {
             vm.day = day;
-            setNothingToday(day);
             updateSelectedDayArray();
-        }
-
-        function setNothingToday(day) {
-            for(var i in vm.showListByNextEpisode) {
-                if(vm.showListByNextEpisode[i].episode.release_date == day) {
-                    vm.nothingToday = false;
-                    return;
-                }
+            if(vm.showsOnSelectedDay.length == 0) {
+                vm.nothingToday = true;
             }
-            vm.nothingToday = true;
+            else {
+                vm.nothingToday = false;
+            }
         }
 
         function findDayByOffset(offsetFromToday) {
@@ -125,7 +120,7 @@
                                         var data = JSON.parse(res.data);
                                         show.backdropFilePath = data.backdrop_path;
                                         vm.showListByNextEpisode.push(show);
-                                        setNothingToday(vm.day);
+                                        updateSelectedDayArray();
                                         window.sessionStorage.setItem(show.tmdbId, JSON.stringify(show));
                                     });
                             }

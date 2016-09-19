@@ -97,6 +97,7 @@
                 if(storedShow) {
                     storedShow = JSON.parse(storedShow);
                     vm.showListByNextEpisode.push(storedShow);
+                    updateSelectedDayArray();
                 }
                 else {
                     var name = formatForEpguides(vm.user.shows[i].name);
@@ -104,7 +105,7 @@
                         .nextEpisode(name)
                         .then(function (res) {
                             var show = JSON.parse(res.data);
-                            if (show.error) {
+                            if (show.hasOwnProperty('error')) {
                                 return show;
                             }
                             else {

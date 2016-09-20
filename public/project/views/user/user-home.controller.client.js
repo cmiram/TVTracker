@@ -96,8 +96,10 @@
                 var storedShow = window.sessionStorage.getItem(vm.user.shows[i].tmdbId);
                 if(storedShow) {
                     storedShow = JSON.parse(storedShow);
-                    vm.showListByNextEpisode.push(storedShow);
-                    updateSelectedDayArray();
+                    if(!storedShow.hasOwnProperty('error')) {
+                        vm.showListByNextEpisode.push(storedShow);
+                        updateSelectedDayArray();
+                    }
                 }
                 else {
                     var name = formatForEpguides(vm.user.shows[i].name);
@@ -114,16 +116,22 @@
                             }
                         })
                         .then(function (show) {
-                            if (!show.error && nextInNextSevenDays(show.episode.release_date)) {
-                                TmdbService
-                                    .showInfo(show.tmdbId)
-                                    .then(function (res) {
-                                        var data = JSON.parse(res.data);
-                                        show.backdropFilePath = data.backdrop_path;
-                                        vm.showListByNextEpisode.push(show);
-                                        updateSelectedDayArray();
-                                        window.sessionStorage.setItem(show.tmdbId, JSON.stringify(show));
-                                    });
+                            if (!show.hasOwnProperty('error')) {
+                                if (nextInNextSevenDays(show.episode.release_date)) {
+                                    TmdbService
+                                        .showInfo(show.tmdbId)
+                                        .then(function (res) {
+                                            var data = JSON.parse(res.data);
+                                            show.backdropFilePath = data.backdrop_path;
+                                            vm.showListByNextEpisode.push(show);
+                                            updateSelectedDayArray();
+                                            window.sessionStorage.setItem(show.tmdbId, JSON.stringify(show));
+                                        });
+                                }
+                            }
+                            else {
+                                show.tmdbId = getTmdbIdFromUserArray(show.name);
+                                window.sessionStorage.setItem(show.tmdbId, JSON.stringify(show));
                             }
                         });
                 }

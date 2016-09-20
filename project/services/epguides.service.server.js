@@ -63,7 +63,9 @@ module.exports = function(app) {
                 res.json(body);
             }
             else if(response.statusCode == 404) {
-                res.json(body);
+                body = JSON.parse(body);
+                body.name = show;
+                res.json(JSON.stringify(body));
             }
             else {
                 res.json(error);

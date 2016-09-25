@@ -1,0 +1,2 @@
+-ability on show page to view by season/episode
+-add links to netflix/amazon/hulu 

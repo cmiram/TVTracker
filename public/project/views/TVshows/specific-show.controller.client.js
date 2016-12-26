@@ -31,7 +31,7 @@
                             vm.nextEpisode = JSON.parse(res.data);
                         },
                         function(err) {
-                            vm.nextEpisode = null;
+                            vm.nextEpisode = false;
                         });
                     EpguidesService
                         .lastEpisode(formatForEpguides(vm.show.name))
@@ -39,7 +39,7 @@
                             vm.lastEpisode = JSON.parse(res.data);
                         },
                         function(err) {
-                            vm.lastEpisode = null;
+                            vm.lastEpisode = false;
                         });
 
                 });

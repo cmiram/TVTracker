@@ -28,20 +28,25 @@
                     EpguidesService
                         .nextEpisode(formatForEpguides(vm.show.name))
                         .then(function(res) {
-                            vm.nextEpisode = JSON.parse(res.data);
-                        },
-                        function(err) {
-                            vm.nextEpisode = null;
+                            var data = JSON.parse(res.data);
+                            if(data.error) {
+                                vm.nextEpisode = false;
+                            }
+                            else {
+                                vm.nextEpisode = JSON.parse(data);
+                            }
                         });
                     EpguidesService
                         .lastEpisode(formatForEpguides(vm.show.name))
                         .then(function(res) {
-                            vm.lastEpisode = JSON.parse(res.data);
-                        },
-                        function(err) {
-                            vm.lastEpisode = null;
+                            var data = JSON.parse(res.data);
+                            if(data.error) {
+                                vm.lastEpisode = false;
+                            }
+                            else {
+                                vm.lastEpisode = JSON.parse(res.data);
+                            }
                         });
-
                 });
             TmdbService
                 .externalIds(vm.tmdbId)

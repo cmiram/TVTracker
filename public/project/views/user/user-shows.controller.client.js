@@ -38,7 +38,7 @@
                             .nextEpisode(formatForEpguides(show.name))
                             .then(function (res) {
                                 var show = JSON.parse(res.data);
-                                if (show) {
+                                if (!show.error) {
                                     updateShowArray(show);
                                 }
                             });

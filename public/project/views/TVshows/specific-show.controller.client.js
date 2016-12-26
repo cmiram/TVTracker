@@ -33,7 +33,7 @@
                                 vm.nextEpisode = false;
                             }
                             else {
-                                vm.nextEpisode = JSON.parse(data);
+                                vm.nextEpisode = data;
                             }
                         });
                     EpguidesService
@@ -44,7 +44,7 @@
                                 vm.lastEpisode = false;
                             }
                             else {
-                                vm.lastEpisode = JSON.parse(res.data);
+                                vm.lastEpisode = data;
                             }
                         });
                 });

@@ -59,7 +59,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-4" ng-repeat="show in model.popularShows">
+        <div class="col-sm-12 col-md-4" ng-repeat="show in model.popularShows">
             <a href="/#/shows/browse/{{show.id}}"><img class="img-rounded" ng-src="{{model.getShowArt(show)}}" alt="N/A"></a>
             <div class="caption text-center">
                 <h3>{{show.name}}</h3>
@@ -77,5 +77,4 @@
         </div>
     </div>
     <a class="btn btn-primary btn-block" href="/#/shows/browse/topRated">Browse More Top Rated Shows</a>
-
 </div>

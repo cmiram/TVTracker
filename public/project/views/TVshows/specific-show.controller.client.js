@@ -29,7 +29,7 @@
                         .nextEpisode(formatForEpguides(vm.show.name))
                         .then(function(res) {
                             var data = JSON.parse(res.data);
-                            if(data.error) {
+                            if(data === null || data.error) {
                                 vm.nextEpisode = false;
                             }
                             else {
@@ -40,7 +40,7 @@
                         .lastEpisode(formatForEpguides(vm.show.name))
                         .then(function(res) {
                             var data = JSON.parse(res.data);
-                            if(data.error) {
+                            if(data === null || data.error) {
                                 vm.lastEpisode = false;
                             }
                             else {

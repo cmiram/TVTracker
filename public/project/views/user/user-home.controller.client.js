@@ -30,10 +30,10 @@
             if(vm.user.shows.length > 0) {
                 getNextEpisodesForUser();
                 getFollowsUsers();
-                setTopRated();
-                setPopular();
                 setSimilar();
             }
+            setTopRated();
+            setPopular();
         }
         init();
 

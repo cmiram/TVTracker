@@ -79,7 +79,7 @@
             </div>
         </div>
     </div>
-    <a class="btn btn-primary btn-block">Similar to Shows You Follow</a>
+    <a ng-show="model.user.shows.length > 0" class="btn btn-primary btn-block">Similar to Shows You Follow</a>
 
     <div class="row">
         <div class="col-md-4" ng-repeat="show in model.popularShows">

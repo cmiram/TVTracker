@@ -27,11 +27,13 @@
             vm.userFollows = [];
             vm.daySelected = vm.daysToCheck[0];
             vm.showsOnSelectedDay = [];
-            getNextEpisodesForUser();
-            getFollowsUsers();
-            setTopRated();
-            setPopular();
-            setSimilar();
+            if(vm.user.shows.length > 0) {
+                getNextEpisodesForUser();
+                getFollowsUsers();
+                setTopRated();
+                setPopular();
+                setSimilar();
+            }
         }
         init();
 
@@ -386,4 +388,10 @@
             window.history.back();
         }
     }
+
+    function onOrientationChange() {
+        console.log(screen.orientation);
+    }
+
+    window.addEventListener('orientationchange', onOrientationChange);
 })();

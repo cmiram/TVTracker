@@ -109,7 +109,10 @@
                         .nextEpisode(name)
                         .then(function (res) {
                             var show = JSON.parse(res.data);
-                            if (show.hasOwnProperty('error')) {
+                            if (show === null) {
+                                return null;
+                            }
+                            else if (show.hasOwnProperty('error')) {
                                 return show;
                             }
                             else {
@@ -118,6 +121,9 @@
                             }
                         })
                         .then(function (show) {
+                            if (show === null) {
+                                return;
+                            }
                             if (!show.hasOwnProperty('error')) {
                                 if (nextInNextSevenDays(show.episode.release_date)) {
                                     TmdbService

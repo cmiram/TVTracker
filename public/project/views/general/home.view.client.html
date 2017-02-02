@@ -36,7 +36,13 @@
     </div>
 </nav>
 
+
 <div class="container">
+
+    <div ng-if="model.badLogin" class="alert alert-danger text-center login-warning">
+        {{model.badLogin}}
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <h2 class="text-center">Welcome to TVTracker!</h2>

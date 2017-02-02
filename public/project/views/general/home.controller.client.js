@@ -87,7 +87,10 @@
                         }
                     },
                     function (error) {
-                        vm.error = "User not found";
+                        if(error.status === 401) {
+                            vm.badLogin = 'Invalid Username & Password Combination';
+                            return;
+                        }
                     }
                 );
         }

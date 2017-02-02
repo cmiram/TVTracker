@@ -21,28 +21,35 @@
         init();
 
         function getShowsInfo() {
-            var shows = window.sessionStorage.getItem('AllUserShows');
-            if(shows) {
-                shows = JSON.parse(shows);
-                vm.shows = shows;
-                return;
-            }
-
             for(var i in vm.user.shows) {
                 TmdbService
                     .showInfo(vm.user.shows[i].tmdbId)
                     .then(function (res) {
                         var show = JSON.parse(res.data);
-                        vm.shows.push(show);
+                        pushShowAlphabetically(show);
                         EpguidesService
                             .nextEpisode(formatForEpguides(show.name))
                             .then(function (res) {
                                 var show = JSON.parse(res.data);
-                                if (!show.error) {
+                                if(!show.error) {
                                     updateShowArray(show);
                                 }
                             });
                     });
+            }
+        }
+
+        function pushShowAlphabetically(show) {
+            if(vm.shows.length === 0) {
+                vm.shows.push(show);
+            }
+            else {
+                var index = 0;
+                while(index < vm.shows.length && vm.shows[index].name.localeCompare(show.name) < 0) {
+                    index++;
+                }
+                vm.shows.splice(index, 0, show);
+                vm.shows.join();
             }
         }
 

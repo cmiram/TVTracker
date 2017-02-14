@@ -75,7 +75,6 @@
             for(var i in vm.shows) {
                 if(name == formatForEpguides(vm.shows[i].name).toUpperCase()) {
                     vm.shows[i].next = show.episode.release_date;
-                    window.sessionStorage.setItem('AllUserShows', JSON.stringify(vm.shows));
                     return;
                 }
             }

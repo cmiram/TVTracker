@@ -48,6 +48,9 @@
             if(show.toLowerCase() === 'empire') {
                 return 'empire_2015';
             }
+            else if(show.toLowerCase() === 'tosh') {
+                return 'tosh0'
+            }
             return show;
         }
     }

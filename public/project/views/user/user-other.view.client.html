@@ -4,7 +4,7 @@
 
 <div class="container">
 
-    <p>Common Shows: </p>
+    <h3>Common Shows: </h3>
     <div ng-if="model.commonShows.length == 0" class="alert alert-danger text-center">
         You have no shows in common
     </div>
@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <p ng-if="!(model.commonShows.length == 0)">Similar to your common shows:</p>
+    <h3 ng-if="!(model.commonShows.length == 0)">Similar to your common shows:</h3>
     <div class="row">
         <div class="col-md-4" ng-repeat="show in model.similarShows">
             <a href="/#/shows/browse/{{show.id}}"><img class="img-rounded" ng-src="{{model.getShowArt(show)}}"/></a>

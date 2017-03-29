@@ -5,14 +5,13 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 // configure a public directory to host static content
 app.use(express.static(__dirname + '/public'));
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
-var port      = process.env.OPENSHIFT_NODEJS_PORT || 3005;
-var passport      = require('passport');
-var session       = require('express-session');
+var port = process.env.OPENSHIFT_NODEJS_PORT || 3005;
+var passport = require('passport');
+var session = require('express-session');
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -22,9 +21,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
 var connectionString;
-
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
     connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
         process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
@@ -38,5 +35,4 @@ else {
 mongoose.connect(connectionString);
 
 require('./project/app')(app);
-
 app.listen(port, ipaddress);

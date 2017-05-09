@@ -10,19 +10,23 @@
         vm.searchShows = searchShows;
         vm.goBack = goBack;
         vm.onEnter = onEnter;
+        vm.seasonSelectedEvent = seasonSelectedEvent;
+        vm.episodeSelectedEvent = episodeSelectedEvent;
 
         function init() {
             vm.user = $rootScope.currentUser;
             vm.tmdbId = $routeParams.showId;
+            vm.seasons = [{niceName: "Season", value: -1}];
+            vm.episodes = [{niceName: "Episode", value: -1}];
             if(vm.user) {
                 vm.isFollowing = checkIfFollowing();
             }
-
             TmdbService
                 .showInfo(vm.tmdbId)
                 .then(function(res) {
                     vm.show = JSON.parse(res.data);
                     vm.showArtPath = getShowArt(vm.show);
+                    updateSeasonSelector();
                 })
                 .then(function() {
                     EpguidesService
@@ -71,6 +75,14 @@
                 }
             }
             return false;
+        }
+
+        function updateSeasonSelector() {
+            var seasonJson = {};
+            for(var i=1; i<=vm.show.number_of_seasons; i++) {
+                seasonJson = {niceName: i.toString(), value: i};
+                vm.seasons.push(seasonJson);
+            }
         }
 
         function toggleFollow() {
@@ -133,6 +145,10 @@
             else {
                 return $sce.trustAsResourceUrl('/project/resources/no_image_available.png');
             }
+        }
+
+        function seasonSelectedEvent(season) {
+            
         }
 
         function searchShows(query) {

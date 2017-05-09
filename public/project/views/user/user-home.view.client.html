@@ -5,7 +5,7 @@
 <div class="container">
 
     <h4>Shows you Watch:</h4>
-    <div class="day-select  ">
+    <div class="day-select">
         Airing On:
         <select ng-model="daySelected" ng-change="model.daySelectedEvent(daySelected)">
             <option ng-repeat="day in model.daysToCheck" value="{{day.name}}">{{day.niceName}}</option>

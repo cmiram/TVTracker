@@ -10,6 +10,14 @@
         <h5>Rated: {{model.content_rating}}</h5>
         <h5 ng-if="model.nextEpisode">Next Episode: {{model.nextEpisode.episode.release_date}}</h5>
         <h5 ng-if="model.lastEpisode">Last Episode: {{model.lastEpisode.episode.release_date}}</h5>
+
+        <select ng-model="seasonSelected" ng-change="model.seasonSelectedEvent(seasonSelected)">
+            <option ng-repeat="season in model.seasons" value="{{day.value}}">{{day.niceName}}</option>
+        </select>
+        <select ng-model="episodeSelected" ng-change="model.episodeSelectedEvent(episodeSelected)">
+            <option ng-repeat="episode in model.episodes" value="{{episode.value}}">{{episode.niceName}}</option>
+        </select>
+
         <div class="progress">
             <div class="progress-bar progress-bar-danger" role="progressbar" style="width: {{model.showRating}}%;">
                 {{model.show.vote_average}} / 10 IMDB Rating

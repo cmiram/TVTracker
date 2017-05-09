@@ -19,6 +19,7 @@ module.exports = function(app) {
     app.get('/api/tmdb/onTheAir', nextSevenDays);
     app.get('/api/tmdb/airingToday/:page', airingToday);
     app.get('/api/tmdb/episode/:id/:season/:ep_number', specificEpisode);
+    app.get('/api/tmdb/season/:id/:season', seasonInfo);
 
     function searchShows(req, res) {
         var query = req.params.query;
@@ -183,6 +184,20 @@ module.exports = function(app) {
         var season = req.params.season;
         var episode = req.params.ep_num;
         var url = baseUrl + 'tv/' + show + '/season/' + season + '/episode/' + episode + endUrl;
+        request(url, function(error, response, body) {
+            if(!error && response.statusCode === 200) {
+                res.json(body);
+            }
+            else {
+                res.status(400).send('error with api call');
+            }
+        });
+    }
+
+    function seasonInfo(req, res) {
+        var show = req.params.id;
+        var season = req.params.season;
+        var url = baseUrl + 'tv/' + show + '/season/' + season + endUrl;
         request(url, function(error, response, body) {
             if(!error && response.statusCode === 200) {
                 res.json(body);

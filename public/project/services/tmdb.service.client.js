@@ -20,7 +20,8 @@
             topRated: topRated,
             popular: popular,
             searchShows: searchShows,
-            specificShow: specificShow
+            specificShow: specificShow,
+            seasonInfo: seasonInfo
         };
         return api;
 
@@ -83,8 +84,14 @@
             var url = baseUrl + 'search/' + query;
             return $http.get(url);
         }
+
         function specificShow(id, season, episode) {
             var url = baseUrl + 'episode/' + id + '/' + season + '/' + episode;
+            return $http.get(url);
+        }
+
+        function seasonInfo(id, season) {
+            var url = baseUrl + 'season/' + id + '/' + season;
             return $http.get(url);
         }
     }

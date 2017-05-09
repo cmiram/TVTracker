@@ -19,7 +19,8 @@
             airingToday: airingToday,
             topRated: topRated,
             popular: popular,
-            searchShows: searchShows
+            searchShows: searchShows,
+            specificShow: specificShow
         };
         return api;
 
@@ -80,6 +81,10 @@
         
         function searchShows(query) {
             var url = baseUrl + 'search/' + query;
+            return $http.get(url);
+        }
+        function specificShow(id, season, episode) {
+            var url = baseUrl + 'episode/' + id + '/' + season + '/' + episode;
             return $http.get(url);
         }
     }

@@ -32,9 +32,17 @@
                             .then(function (res) {
                                 var show = JSON.parse(res.data);
                                 if(!show.error) {
-                                    updateShowArray(show);
+                                    updateShowArray(show, true);
                                 }
                             });
+                        EpguidesService
+                            .lastEpisode(formatForEpguides(show.name))
+                            .then(function (res) {
+                                var show = JSON.parse(res.data);
+                                if(!show.error) {
+                                    updateShowArray(show, false);
+                                }
+                            })
                     });
             }
         }
@@ -70,11 +78,16 @@
             return str;
         }
 
-        function updateShowArray(show) {
+        function updateShowArray(show, is_next) {
             var name = show.episode.show.epguide_name.toUpperCase();
             for(var i in vm.shows) {
                 if(name == formatForEpguides(vm.shows[i].name).toUpperCase()) {
-                    vm.shows[i].next = show.episode.release_date;
+                    if(is_next) {
+                        vm.shows[i].next = show.episode.release_date;
+                    }
+                    else {
+                        vm.shows[i].last = show.episode.release_date;
+                    }
                     return;
                 }
             }

@@ -14,6 +14,8 @@
                     <h5>Still Running</h5>
                     <h5 ng-show="!show.next">Next Episode: N/A</h5>
                     <h5 ng-show="show.next">Next Episode: {{show.next}}</h5>
+                    <h5 ng-show="!show.last">Last Episode: N/A</h5>
+                    <h5 ng-show="show.last">Last Episode: {{show.last}}</h5>
                 </div>
                 <div ng-show="show.status == 'Ended'"
                      class="alert alert-danger button-block text-center status-alert">

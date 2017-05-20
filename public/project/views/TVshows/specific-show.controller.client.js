@@ -148,7 +148,7 @@
         }
 
         function seasonSelectedEvent(season) {
-            
+
         }
 
         function searchShows(query) {

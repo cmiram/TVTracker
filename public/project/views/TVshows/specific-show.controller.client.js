@@ -148,6 +148,21 @@
         }
 
         function seasonSelectedEvent(season) {
+            TmdbService
+                .seasonInfo(vm.tmdbId, season)
+                .then(function(res) {
+                    var seasons = JSON.parse(res.data);
+                    vm.seasonData = seasons;
+                });
+            var episode_json = {};
+            for(var i=1; i<vm.show.seasons[season-1].episode_count; i++) {
+                episode_json = {episode: i.toString(), value: i-1};
+                vm.episodes.push(episode_json);
+            }
+        }
+
+        function episodeSelectedEvent(episode) {
+            var episodeData = vm.seasonData.episodes[episode];
 
         }
 

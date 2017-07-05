@@ -1,4 +1,4 @@
 node_modules
 .idea
 fonts
-app.yaml
+*.yaml

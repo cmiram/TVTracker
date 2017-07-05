@@ -27,8 +27,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "gcloud app deploy",
-    "start": "node server.js"
+    "start": "node ./server.js"
   },
-  "author": "Jose G. Annunziato",
+  "engines": {
+    "node": "6.1"
+  },
+  "author": "Chris Miramontes",
   "license": "ISC"
 }

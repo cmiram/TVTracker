@@ -8,8 +8,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // configure a public directory to host static content
 app.use(express.static(__dirname + '/public'));
 
-var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
-var port = process.env.OPENSHIFT_NODEJS_PORT || 3005;
+//var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
+var port = process.env.PORT || 3005;
 var passport = require('passport');
 var session = require('express-session');
 
@@ -35,4 +35,7 @@ else {
 mongoose.connect(connectionString);
 
 require('./project/app')(app);
-app.listen(port, ipaddress);
+var server = app.listen(port, function() {
+    console.log('App listening on port %s', server.address().port);
+    console.log('Press Ctrl+C to quit');
+});

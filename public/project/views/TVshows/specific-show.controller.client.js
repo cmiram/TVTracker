@@ -14,6 +14,7 @@
         vm.episodeSelectedEvent = episodeSelectedEvent;
 
         function init() {
+            vm.isSpecificShow = true;
             vm.user = $rootScope.currentUser;
             vm.tmdbId = $routeParams.showId;
             vm.seasons = [{niceName: "Season", value: -1}];

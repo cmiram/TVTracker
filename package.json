@@ -1,7 +1,7 @@
 {
   "name": "web-dev",
   "version": "1.0.0",
-  "description": "Web Dev at Northeastern University",
+  "description": "Web Dev project for Northeastern University",
   "main": "server.js",
   "dependencies": {
     "angular-route": "^1.5.7",
@@ -28,6 +28,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
-  "author": "Jose G. Annunziato",
+  "author": "Chris Miramontes",
   "license": "ISC"
 }

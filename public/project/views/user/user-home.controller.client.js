@@ -394,10 +394,4 @@
             window.history.back();
         }
     }
-
-    function onOrientationChange() {
-        console.log(screen.orientation);
-    }
-
-    window.addEventListener('orientationchange', onOrientationChange);
 })();

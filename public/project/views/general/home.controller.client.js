@@ -81,7 +81,7 @@
                     function(response) {
                         var user = response.data;
                         if(user) {
-                            user.lastSeen = Date.now;
+                            user.lastSeen = new Date(Date.now());
                             $rootScope.currentUser = user;
                             var id = user._id;
                             UserService

@@ -7,10 +7,7 @@ module.exports = function () {
         firstName: String,
         lastName: String,
         email: String,
-        lastSeen: {
-            type: Date,
-            default: Date.now
-        }
+        lastSeen: Date,
         shows: [{
             name: String,
             tmdbId: String

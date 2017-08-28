@@ -81,15 +81,17 @@
                     function(response) {
                         var user = response.data;
                         if(user) {
+                            user.lastSeen = Date.now;
                             $rootScope.currentUser = user;
                             var id = user._id;
+                            UserService
+                                .updateUser(user._id, user);
                             $location.url("/user/home/" + id);
                         }
                     },
                     function (error) {
                         if(error.status === 401) {
                             vm.badLogin = 'Invalid Username & Password Combination';
-                            return;
                         }
                     }
                 );

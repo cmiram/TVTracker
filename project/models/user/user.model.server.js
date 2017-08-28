@@ -45,6 +45,7 @@ module.exports = function() {
                     firstName: newUser.firstName,
                     lastName: newUser.lastName,
                     email: newUser.email,
+                    lastSeen: newUser.lastSeen,
                     shows: newUser.shows,
                     follows: newUser.follows
                 }

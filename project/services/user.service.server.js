@@ -70,12 +70,15 @@ module.exports = function(app,models) {
                 function(user) {
                     if(user && bcrypt.compareSync(password, user.password)) {
                         return done(null, user);
-                    } else {
+                    }
+                    else {
                         return done(null, false);
                     }
                 },
                 function(err) {
-                    if (err) { return done(err); }
+                    if(err) {
+                        return done(err);
+                    }
                 }
             );
     }
@@ -88,7 +91,8 @@ module.exports = function(app,models) {
                 function(user) {
                     if(user) {
                         return done(null, user);
-                    } else {
+                    }
+                    else {
                         var user = {
                             username: profile.displayName.replace(/ /g, ''),
                             facebook: {
@@ -97,8 +101,7 @@ module.exports = function(app,models) {
                                 token: token
                             }
                         };
-                        return userModel
-                            .createUser(user);
+                        return userModel.createUser(user);
                     }
                 }
             )

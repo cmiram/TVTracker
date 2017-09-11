@@ -27,13 +27,13 @@
             vm.userFollows = [];
             vm.daySelected = vm.daysToCheck[0];
             vm.showsOnSelectedDay = [];
-            getNextEpisodesForUser();
             getFollowsUsers();
             if(vm.user.shows.length > 0) {
                 setSimilar();
             }
             setTopRated();
             setPopular();
+            getNextEpisodesForUser();
         }
         init();
 

@@ -12,10 +12,10 @@ module.exports = function(app) {
         var url = baseUrl + 'i=' + imdbId + endUrl;
 
         request(url, function(error, response, body) {
-            if(!error && response.statusCode == 200) {
+            if(!error && response.statusCode === 200) {
                 res.json(body);
             }
-            else if(response.statusCode == 404) {
+            else if(response.statusCode === 404) {
                 res.json(error);
             }
             else {

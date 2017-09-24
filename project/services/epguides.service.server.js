@@ -12,10 +12,10 @@ module.exports = function(app) {
     function showMetadata(req, res) {
         var show = req.params.show;
         request(baseUrl + '/show/' + show + '/info/', function(error, response, body) {
-            if(!error && response.statusCode == 200) {
+            if(!error && response.statusCode === 200) {
                 res.json(body);
             }
-            else if(response.statusCode == 404) {
+            else if(response.statusCode === 404) {
                 res.json(error);
             }
             else {
@@ -27,10 +27,10 @@ module.exports = function(app) {
     function allEpisodes(req, res) {
         var show = req.params.show;
         request(baseUrl + '/show/' + show + '/', function(error, response, body) {
-            if(!error && response.statusCode == 200) {
+            if(!error && response.statusCode === 200) {
                 res.json(body);
             }
-            else if(response.statusCode == 404) {
+            else if(response.statusCode === 404) {
                 res.json(error);
             }
             else {
@@ -44,10 +44,10 @@ module.exports = function(app) {
         var season = req.params.season;
         var episode = req.params.episode;
         request(baseUrl + '/show/' + show + '/' + season + '/' + episode + '/', function(error, response, body) {
-            if(!error && response.statusCode == 200) {
+            if(!error && response.statusCode === 200) {
                 res.json(body);
             }
-            else if(response.statusCode == 404) {
+            else if(response.statusCode === 404) {
                 res.json(error);
             }
             else {
@@ -59,10 +59,10 @@ module.exports = function(app) {
     function nextEpisode(req, res) {
         var show = req.params.show;
         request(baseUrl + '/show/' + show + '/next/', function(error, response, body) {
-            if(!error && response.statusCode == 200) {
+            if(!error && response.statusCode === 200) {
                 res.json(body);
             }
-            else if(response.statusCode == 404) {
+            else if(response.statusCode === 404) {
                 body = JSON.parse(body);
                 body.name = show;
                 res.json(JSON.stringify(body));
@@ -76,10 +76,10 @@ module.exports = function(app) {
     function lastEpisode(req, res) {
         var show = req.params.show;
         request(baseUrl + '/show/' + show + '/last/', function(error, response, body) {
-            if(!error && response.statusCode == 200) {
+            if(!error && response.statusCode === 200) {
                 res.json(body);
             }
-            else if(response.statusCode == 404) {
+            else if(response.statusCode === 404) {
                 res.json(error);
             }
             else {

@@ -66,7 +66,7 @@
         function daySelectedEvent(day) {
             vm.day = day;
             updateSelectedDayArray();
-            if(vm.showsOnSelectedDay.length == 0) {
+            if(vm.showsOnSelectedDay.length === 0) {
                 vm.nothingToday = true;
             }
             else {

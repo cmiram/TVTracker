@@ -32,7 +32,13 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
 else {
     connectionString = 'mongodb://127.0.0.1:27017/webdev';
 }
-mongoose.connect(connectionString);
+
+const options = {
+    useMongoClient: true
+};
+
+mongoose.Promise = global.Promise;
+mongoose.connect(connectionString, options);
 
 require('./project/app')(app);
 app.listen(port, ipaddress);

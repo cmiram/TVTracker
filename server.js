@@ -24,11 +24,6 @@ app.use(passport.session());
 var connectionString;
 if(process.env.MONGO_URL) {
     connectionString = process.env.MONGO_URL;
-/*    connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-        process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-        process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-        process.env.OPENSHIFT_APP_NAME;*/
 }
 else {
     connectionString = 'mongodb://127.0.0.1:27017/webdev';

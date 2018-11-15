@@ -1,7 +1,7 @@
 module.exports = function(app) {
-    var request = require('request');
-    
-    var baseUrl = 'http://epguides.frecar.no';
+    const request = require('request');
+
+    const baseUrl = '127.0.0.1:8917';
 
     app.get('/api/epguides/metadata/:show', showMetadata);
     app.get('/api/epguides/allepisodes/:show', allEpisodes);

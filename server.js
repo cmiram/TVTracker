@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 
 var ipaddress = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0';
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var port = 8675 //  process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var passport = require('passport');
 var session = require('express-session');
 
